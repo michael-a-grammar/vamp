@@ -1,0 +1,18 @@
+return {
+  expert = {
+    -- stylua: ignore start
+    elixir_source_directory = '',
+    use_mix_deps_path       = true,
+    -- stylua: ignore start
+  },
+
+  bookmarks = {
+    {
+      -- stylua: ignore start
+      id   = '',
+      path = '',
+      desc = '',
+      -- stylua: ignore start
+    },
+  },
+}

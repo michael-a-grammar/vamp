@@ -1,0 +1,20 @@
+{
+  "local": {
+    "prefix": "l",
+    "body": "local $1 = $0"
+  },
+
+  "Remove prefixes": {
+    "prefix": ["lfu", "ll", "lpca"]
+  },
+
+  "StyLua: ignore start": {
+    "prefix": "slis",
+    "body": "-- stylua: ignore start"
+  },
+
+  "StyLua: ignore end": {
+    "prefix": "slie",
+    "body": "-- stylua: ignore end"
+  }
+}

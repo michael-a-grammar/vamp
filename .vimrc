@@ -4,6 +4,14 @@ let g:is_mac    = has('mac')
 let g:is_macvim = has('gui_macvim')
 let g:is_unix   = has('unix')
 
+let g:has_pwsh = executable('pwsh')
+
+if g:has_pwsh
+  set shell=pwsh
+  set shellcmdflag=-NoLogo\ -NonInteractive\ -NoProfile\ -Command
+  set shellxquote="- "
+endif
+
 if !g:is_nvim
   set nocompatible
   set background=dark

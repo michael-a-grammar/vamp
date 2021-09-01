@@ -6,12 +6,6 @@ let g:is_unix   = has('unix')
 
 let g:has_pwsh = executable('pwsh')
 
-if g:has_pwsh
-  set shell=pwsh
-  set shellcmdflag=-NoLogo\ -NonInteractive\ -NoProfile\ -Command
-  set shellxquote="- "
-endif
-
 if !g:is_nvim
   set nocompatible
   set background=dark
@@ -143,6 +137,14 @@ inoremap jj <esc>
 
 nnoremap <leader>/t :nohlsearch<cr>
 
+
+nnoremap <leader>vv <c-v>
+
+nnoremap <leader>wi <c-w>k
+nnoremap <leader>we <c-w>j
+nnoremap <leader>wn <c-w>h
+nnoremap <leader>wo <c-w>l
+
 nnoremap <leader>ze :edit $MYVIMRC<cr>
 nnoremap <leader>zz :source $MYVIMRC<cr>
 
@@ -179,10 +181,24 @@ function! LookupInHelp() abort
   execute 'help ' . current_word
 endfunction
 
+function! SetPowerShellAsShell() abort
+  if g:has_pwsh
+    set shell=pwsh
+    set shellcmdflag=-NoLogo\ -NonInteractive\ -NoProfile\ -Command
+    set shellxquote="- "
+  endif
+endfunction
+
 augroup vim_filetype_functions
   autocmd!
   autocmd FileType vim
     \ nnoremap <buffer> <leader>hh :call LookupInHelp()<cr>
+augroup end
+
+augroup powershell_filetype_functions
+  autocmd!
+  autocmd FileType ps1
+    \ call SetPowerShellAsShell()
 augroup end
 
 call plug#begin('~/.vim/plugged')

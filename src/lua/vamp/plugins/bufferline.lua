@@ -1,6 +1,8 @@
 return {
   "akinsho/bufferline.nvim",
 
+  enabled = false,
+
   after = "catppuccin",
 
   dependencies = {
@@ -104,7 +106,7 @@ return {
           auto_close = true,
           icon = "  ",
           name = " Tests",
-          priority = bufferline_groups.increment_priority(),
+          priority = bufferline_groups.increment_group_priority(),
 
           highlight = {
             sp = catppuccin.mauve,
@@ -119,7 +121,7 @@ return {
           auto_close = true,
           icon = " 󰪰 ",
           name = "󰪰 Aggregates",
-          priority = bufferline_groups.increment_priority(),
+          priority = bufferline_groups.increment_group_priority(),
 
           highlight = {
             sp = catppuccin.red,
@@ -134,7 +136,7 @@ return {
           auto_close = true,
           icon = "  ",
           name = " Commands",
-          priority = bufferline_groups.increment_priority(),
+          priority = bufferline_groups.increment_group_priority(),
 
           highlight = {
             sp = catppuccin.peach,
@@ -149,7 +151,7 @@ return {
           auto_close = true,
           name = "󰨦 Events",
           icon = " 󰨦 ",
-          priority = bufferline_groups.increment_priority(),
+          priority = bufferline_groups.increment_group_priority(),
 
           highlight = {
             sp = catppuccin.yellow,
@@ -164,7 +166,7 @@ return {
           auto_close = true,
           icon = " 󰐮 ",
           name = "󰐮 Projectors",
-          priority = bufferline_groups.increment_priority(),
+          priority = bufferline_groups.increment_group_priority(),
 
           highlight = {
             sp = catppuccin.green,
@@ -179,7 +181,7 @@ return {
           auto_close = true,
           icon = "   ",
           name = "  Read models",
-          priority = bufferline_groups.increment_priority(),
+          priority = bufferline_groups.increment_group_priority(),
 
           highlight = {
             sp = catppuccin.blue,
@@ -194,7 +196,7 @@ return {
           auto_close = true,
           icon = " 󰪭  ",
           name = "󰪭  Services",
-          priority = bufferline_groups.increment_priority(),
+          priority = bufferline_groups.increment_group_priority(),
 
           highlight = {
             sp = catppuccin.lavender,
@@ -207,7 +209,7 @@ return {
       },
     }
 
-    for _, group in pairs(bufferline_groups.values) do
+    for _, group in pairs(bufferline_groups.groups) do
       table.insert(opts.options.groups.items, group)
     end
 

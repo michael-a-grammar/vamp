@@ -45,13 +45,45 @@ return {
     },
 
     {
-      "<localleader>n/",
+      "<localleader>ni",
       function()
-        require("mona.integrations.grug_far").module({
+        require("mona.integrations.grug_far").module.imports({
           transient = true,
         })
       end,
-      desc = "Find and replace",
+      desc = "Find and replace module imports",
+      ft = "elixir",
+      mode = { "n", "x" },
+    },
+
+    {
+      "<localleader>nn",
+      function()
+        require("mona.integrations.grug_far").module.name({
+          transient = true,
+        })
+      end,
+      desc = "Find and replace module",
+      ft = "elixir",
+      mode = { "n", "x" },
+    },
+
+    {
+      "<localleader>nt",
+      function()
+        require("mona.elixir.module").edit_test_module()
+      end,
+      desc = "Edit test module",
+      ft = "elixir",
+      mode = { "n", "x" },
+    },
+
+    {
+      "<localleader>nT",
+      function()
+        require("telescope").extensions.mona.elixir_test_modules()
+      end,
+      desc = "Test modules",
       ft = "elixir",
       mode = { "n", "x" },
     },
@@ -59,9 +91,9 @@ return {
     {
       "<localleader>ta",
       function()
-        require("telescope").extensions.mona.elixir_application_modules()
+        require("telescope").extensions.mona.elixir_umbrella_app_modules()
       end,
-      desc = "Application Modules",
+      desc = "Umbrella app modules",
       ft = "elixir",
       mode = { "n", "x" },
     },
@@ -71,7 +103,7 @@ return {
       function()
         require("telescope").extensions.mona.elixir_buffer_directory_modules()
       end,
-      desc = "Buffer Directory Modules",
+      desc = "Buffer directory modules",
       ft = "elixir",
       mode = { "n", "x" },
     },
@@ -81,7 +113,7 @@ return {
       function()
         require("telescope").extensions.mona.elixir_project_modules()
       end,
-      desc = "Project Modules",
+      desc = "Project modules",
       ft = "elixir",
       mode = { "n", "x" },
     },
@@ -89,9 +121,9 @@ return {
     {
       "<localleader>tta",
       function()
-        require("telescope").extensions.mona.elixir_application_tests()
+        require("telescope").extensions.mona.elixir_umbrella_app_tests()
       end,
-      desc = "Application Tests",
+      desc = "Umbrella app tests",
       ft = "elixir",
       mode = { "n", "x" },
     },
@@ -101,7 +133,7 @@ return {
       function()
         require("telescope").extensions.mona.elixir_buffer_directory_tests()
       end,
-      desc = "Buffer Directory Tests",
+      desc = "Buffer directory tests",
       ft = "elixir",
       mode = { "n", "x" },
     },
@@ -111,7 +143,7 @@ return {
       function()
         require("telescope").extensions.mona.elixir_project_tests()
       end,
-      desc = "Project Tests",
+      desc = "Project tests",
       ft = "elixir",
       mode = { "n", "x" },
     },
@@ -135,46 +167,46 @@ return {
   },
 
   config = function(_, opts)
-    require("mona").setup(opts)
-
-    local icon = require("mona.config").icon("mona")
-
-    local to_add = {
-      {
-        mode = {
-          "n",
-          "x",
-        },
-
-        {
-          "<localleader>",
-          group = icon .. " mona",
-        },
-
-        {
-          "<localleader>'",
-          group = "",
-        },
-
-        {
-          "<localleader>n",
-          "Module",
-        },
-
-        {
-          "<localleader>t",
-          "Modules",
-        },
-
-        {
-          "<localleader>tt",
-          group = "Tests",
-        },
-      },
-    }
-
-    local which_key = require("which-key")
-
-    which_key.add(to_add)
+    -- require("mona").setup(opts)
+    --
+    -- local icon = require("mona.config").icon("mona")
+    --
+    -- local to_add = {
+    --   {
+    --     mode = {
+    --       "n",
+    --       "x",
+    --     },
+    --
+    --     {
+    --       "<localleader>",
+    --       group = icon .. " mona",
+    --     },
+    --
+    --     {
+    --       "<localleader>'",
+    --       group = "",
+    --     },
+    --
+    --     {
+    --       "<localleader>n",
+    --       "Module",
+    --     },
+    --
+    --     {
+    --       "<localleader>t",
+    --       "Modules",
+    --     },
+    --
+    --     {
+    --       "<localleader>tt",
+    --       group = "Tests",
+    --     },
+    --   },
+    -- }
+    --
+    -- local which_key = require("which-key")
+    --
+    -- which_key.add(to_add)
   end,
 }

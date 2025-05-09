@@ -11,7 +11,7 @@ return {
     "catppuccin/nvim",
     "folke/trouble.nvim",
     "gbprod/yanky.nvim",
-    "michael-a-grammar/mona.nvim",
+    -- "michael-a-grammar/mona.nvim",
 
     {
       "nvim-telescope/telescope-fzf-native.nvim",
@@ -138,7 +138,7 @@ return {
           theme = "ivy",
         },
 
-        mona = {
+        --[[ mona = {
           pickers = {
             pickers = {
               theme = "dropdown",
@@ -146,7 +146,7 @@ return {
           },
 
           theme = "ivy",
-        },
+        }, --]]
       },
 
       pickers = pickers_configuration,
@@ -168,7 +168,7 @@ return {
     telescope.load_extension("file_browser")
     telescope.load_extension("fzf")
     telescope.load_extension("gh")
-    telescope.load_extension("mona")
+    -- telescope.load_extension("mona")
     telescope.load_extension("yank_history")
     telescope.load_extension("z")
 
@@ -212,6 +212,13 @@ return {
 
     vim.keymap.set(
       { "n", "x" },
+      "<leader>*",
+      builtin.grep_string,
+      { desc = "" .. " Grep w/input", noremap = true }
+    )
+
+    vim.keymap.set(
+      { "n", "x" },
       "<leader>,",
       get_buffers_only_cwd,
       { desc = "" .. " Buffers", noremap = true }
@@ -222,6 +229,13 @@ return {
         cwd = file_paths.directory(),
       })
     end, { desc = "" .. " Find files", noremap = true })
+
+    vim.keymap.set(
+      { "n", "x" },
+      "<leader>/",
+      builtin.live_grep,
+      { desc = "" .. " Grep", noremap = true }
+    )
 
     vim.keymap.set(
       { "n", "x" },

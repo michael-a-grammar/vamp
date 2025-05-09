@@ -107,24 +107,17 @@ vim.api.nvim_exec2("runtime macros/matchit.vim", {})
 vim.opt.mouse = "a"
 vim.opt.termguicolors = true
 
-local function define_sign(name, icon)
-  name = "DiagnosticSign" .. name
-
-  vim.fn.sign_define(name, {
-    texthl = name,
-    text = icon,
-    numhl = "",
-  })
-end
-
-define_sign("Error", "")
-define_sign("Hint", "󰮥")
-define_sign("Info", "")
-define_sign("Warn", "")
-
 vim.diagnostic.config({
   float = {
     border = "rounded",
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.HINT] = "󰮥",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.WARN] = "",
+    },
   },
 })
 

@@ -172,4 +172,16 @@ return {
 
     ft = "elixir",
   },
+
+  {
+    "ngscheurich/edeex.nvim",
+
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+
+    ft = "elixir",
+
+    config = true,
+  },
 }

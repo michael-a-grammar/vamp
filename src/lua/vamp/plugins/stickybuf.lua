@@ -1,5 +1,5 @@
 return {
-  "stevearc/stickybuf.nvim",
+	"stevearc/stickybuf.nvim",
 
-  config = true,
+	config = true,
 }

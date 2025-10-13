@@ -1,18 +1,18 @@
 return {
-  "sindrets/diffview.nvim",
+	"sindrets/diffview.nvim",
 
-  config = true,
+	config = true,
 
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
-  },
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+	},
 
-  keys = {
-    {
-      "<leader>ngh",
-      "<cmd>DiffviewFileHistory %<cr>",
-      desc = "File history",
-      mode = { "n", "x" },
-    },
-  },
+	keys = {
+		{
+			"<leader>ngh",
+			"<cmd>DiffviewFileHistory %<cr>",
+			desc = "File history",
+			mode = { "n", "x" },
+		},
+	},
 }

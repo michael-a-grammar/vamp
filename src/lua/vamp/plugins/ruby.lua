@@ -1,9 +1,9 @@
 return {
-  "rhysd/vim-textobj-ruby",
+	"rhysd/vim-textobj-ruby",
 
-  ft = "ruby",
+	ft = "ruby",
 
-  dependencies = {
-    "kana/vim-textobj-user",
-  },
+	dependencies = {
+		"kana/vim-textobj-user",
+	},
 }

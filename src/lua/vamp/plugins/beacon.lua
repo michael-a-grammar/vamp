@@ -1,3 +1,3 @@
 return {
-  "danilamihailov/beacon.nvim",
+	"danilamihailov/beacon.nvim",
 }

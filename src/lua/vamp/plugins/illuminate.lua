@@ -1,3 +1,3 @@
 return {
-  "rrethy/vim-illuminate",
+	"rrethy/vim-illuminate",
 }

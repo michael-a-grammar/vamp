@@ -1,9 +1,9 @@
 return {
-  {
-    "echasnovski/mini.ai",
+	{
+		"echasnovski/mini.ai",
 
-    enabled = false,
-    config = true,
-    version = false,
-  },
+		enabled = false,
+		config = true,
+		version = false,
+	},
 }

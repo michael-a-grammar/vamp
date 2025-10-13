@@ -1,20 +1,20 @@
 return {
-  "jiaoshijie/undotree",
+	"jiaoshijie/undotree",
 
-  config = true,
+	config = true,
 
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-  },
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+	},
 
-  keys = {
-    {
-      "<leader>nu",
-      function()
-        require("undotree").toggle()
-      end,
-      desc = "Undo tree",
-      mode = { "n", "x" },
-    },
-  },
+	keys = {
+		{
+			"<leader>nu",
+			function()
+				require("undotree").toggle()
+			end,
+			desc = "Undo tree",
+			mode = { "n", "x" },
+		},
+	},
 }

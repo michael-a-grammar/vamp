@@ -1,10 +1,10 @@
 return {
-  "norcalli/nvim-colorizer.lua",
+	"norcalli/nvim-colorizer.lua",
 
-  cmd = {
-    "ColorizerAttachToBuffer",
-    "ColorizerDetachFromBuffer",
-    "ColorizerReloadAllBuffers",
-    "ColorizerToggle",
-  },
+	cmd = {
+		"ColorizerAttachToBuffer",
+		"ColorizerDetachFromBuffer",
+		"ColorizerReloadAllBuffers",
+		"ColorizerToggle",
+	},
 }

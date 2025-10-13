@@ -1,30 +1,27 @@
 return {
-  "folke/neodev.nvim",
+	"folke/neodev.nvim",
 
-  ft = "lua",
+	ft = "lua",
 
-  dependencies = {
-    "neovim/nvim-lspconfig",
-  },
+	dependencies = {
+		"neovim/nvim-lspconfig",
+	},
 
-  config = function(_, _)
-    require("neodev").setup({})
+	config = function(_, _)
+		require("neodev").setup({})
 
-    local handlers = {
-      ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = "rounded",
-      }),
+		local handlers = {
+			["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+				border = "rounded",
+			}),
 
-      ["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.signature_help,
-        {
-          border = "rounded",
-        }
-      ),
-    }
+			["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+				border = "rounded",
+			}),
+		}
 
-    require("lspconfig").lua_ls.setup({
-      handlers = handlers,
-    })
-  end,
+		require("lspconfig").lua_ls.setup({
+			handlers = handlers,
+		})
+	end,
 }

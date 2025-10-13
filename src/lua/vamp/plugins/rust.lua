@@ -1,27 +1,24 @@
 return {
-  "mrcjkb/rustaceanvim",
+	"mrcjkb/rustaceanvim",
 
-  ft = "rust",
-  version = "^4",
+	ft = "rust",
+	version = "^4",
 
-  config = function(_, _)
-    local handlers = {
-      ["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.signature_help,
-        {
-          border = "rounded",
-        }
-      ),
-    }
+	config = function(_, _)
+		local handlers = {
+			["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+				border = "rounded",
+			}),
+		}
 
-    vim.g.rustaceanvim = {
-      server = {
-        handlers = handlers,
-      },
+		vim.g.rustaceanvim = {
+			server = {
+				handlers = handlers,
+			},
 
-      tools = {
-        test_executor = "background",
-      },
-    }
-  end,
+			tools = {
+				test_executor = "background",
+			},
+		}
+	end,
 }

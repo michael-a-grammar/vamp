@@ -1,42 +1,42 @@
 return {
-  "folke/flash.nvim",
+	"folke/flash.nvim",
 
-  event = "VeryLazy",
+	event = "VeryLazy",
 
-  keys = {
-    {
-      "r",
-      function()
-        require("flash").remote()
-      end,
-      desc = "Flash remote",
-      mode = "o",
-    },
+	keys = {
+		{
+			"r",
+			function()
+				require("flash").remote()
+			end,
+			desc = "Flash remote",
+			mode = "o",
+		},
 
-    {
-      "<bs>",
-      function()
-        require("flash").jump()
-      end,
-      desc = "Flash",
-      mode = {
-        "n",
-        "x",
-        "o",
-      },
-    },
-  },
+		{
+			"<bs>",
+			function()
+				require("flash").jump()
+			end,
+			desc = "Flash",
+			mode = {
+				"n",
+				"x",
+				"o",
+			},
+		},
+	},
 
-  opts = {
-    labels = "ntesiroamghdkvclpufxzufq",
+	opts = {
+		labels = "ntesiroamghdkvclpufxzufq",
 
-    prompt = {
-      prefix = {
-        {
-          "󱐌",
-          "FlashPromptIcon",
-        },
-      },
-    },
-  },
+		prompt = {
+			prefix = {
+				{
+					"󱐌",
+					"FlashPromptIcon",
+				},
+			},
+		},
+	},
 }

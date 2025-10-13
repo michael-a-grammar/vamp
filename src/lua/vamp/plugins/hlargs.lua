@@ -1,9 +1,9 @@
 return {
-  "m-demare/hlargs.nvim",
+	"m-demare/hlargs.nvim",
 
-  opts = {
-    extras = {
-      named_parameters = true,
-    },
-  },
+	opts = {
+		extras = {
+			named_parameters = true,
+		},
+	},
 }

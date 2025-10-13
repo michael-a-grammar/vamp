@@ -10,8 +10,8 @@ n - next
 p - previous
 x - delete
 
-<c-f> - up
-<c-p> - down
+<c-f> - down / next
+<c-p> - up / previous
 
 Organise object keys alphabetically
 

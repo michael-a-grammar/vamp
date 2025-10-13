@@ -1,20 +1,20 @@
 return {
-  "numToStr/Comment.nvim",
+	"numToStr/Comment.nvim",
 
-  config = true,
+	config = true,
 
-  keys = {
-    {
-      "<leader>;",
-      "<plug>(comment_toggle_linewise)",
-      desc = "Comment linewise w/operator",
-    },
+	keys = {
+		{
+			"<leader>;",
+			"<plug>(comment_toggle_linewise)",
+			desc = "Comment linewise w/operator",
+		},
 
-    {
-      "<leader>;",
-      "<plug>(comment_toggle_linewise_visual)",
-      desc = "Comment selection linewise",
-      mode = "x",
-    },
-  },
+		{
+			"<leader>;",
+			"<plug>(comment_toggle_linewise_visual)",
+			desc = "Comment selection linewise",
+			mode = "x",
+		},
+	},
 }

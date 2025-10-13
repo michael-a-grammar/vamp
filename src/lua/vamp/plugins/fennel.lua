@@ -1,13 +1,13 @@
 return {
-  {
-    "jaawerth/fennel.vim",
+	{
+		"jaawerth/fennel.vim",
 
-    ft = "fennel",
-  },
+		ft = "fennel",
+	},
 
-  {
-    "Olical/nfnl",
+	{
+		"Olical/nfnl",
 
-    ft = "fennel",
-  },
+		ft = "fennel",
+	},
 }

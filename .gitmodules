@@ -1,3 +1,0 @@
-[submodule "src/lua/vamp/local/mona.nvim"]
-	path = src/lua/vamp/local/mona.nvim
-	url = https://github.com/michael-a-grammar/mona.nvim

@@ -1,5 +1,5 @@
 if not vim.g.neovide then
-	return
+  return
 end
 
 vim.g.neovide_cursor_animation_length = 0.0

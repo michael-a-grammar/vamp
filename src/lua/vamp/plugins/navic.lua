@@ -1,7 +1,7 @@
 return {
-	"SmiteshP/nvim-navic",
+  "SmiteshP/nvim-navic",
 
-	opts = {
-		highlight = true,
-	},
+  opts = {
+    highlight = true,
+  },
 }

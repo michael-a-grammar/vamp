@@ -1,3 +1,4 @@
+-- stylua: ignore start
 vim.opt.background = "dark"
 
 vim.opt.clipboard:append("unnamed")
@@ -111,6 +112,7 @@ vim.diagnostic.config({
 	float = {
 		border = "rounded",
 	},
+
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = "",
@@ -133,3 +135,4 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 vim.g["mapleader"] = vim.api.nvim_replace_termcodes("<space>", true, true, true)
 vim.g["maplocalleader"] = vim.api.nvim_replace_termcodes("\\", true, true, true)
+-- stylua: ignore end

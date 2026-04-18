@@ -1,9 +1,9 @@
 local M = {}
 
 local function expand(expression)
-	return function()
-		return vim.fn.expand(expression)
-	end
+  return function()
+    return vim.fn.expand(expression)
+  end
 end
 
 M.directory = expand("%:p:h")

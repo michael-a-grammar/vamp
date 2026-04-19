@@ -94,7 +94,7 @@ return {
 
     insert_into_left_section({
       function()
-        return "󰣐 "
+        return "󰣐"
       end,
 
       color = function()
@@ -251,7 +251,7 @@ return {
     insert_into_right_section({
       "branch",
 
-      icon = " ",
+      icon = "",
 
       color = {
         fg = catppuccin.lavender,

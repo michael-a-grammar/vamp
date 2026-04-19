@@ -58,7 +58,7 @@ return {
         },
 
         {
-          icon = "",
+          icon = "",
           icon_hl = "markdownH3",
           desc = " Terminal",
           desc_hl = "markdownH3",

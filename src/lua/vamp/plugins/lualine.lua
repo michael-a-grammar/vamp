@@ -14,7 +14,7 @@ return {
         return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
       end,
 
-      hide = function()
+      should_hide = function()
         return vim.fn.winwidth(0) > 80
       end,
     }
@@ -26,9 +26,6 @@ return {
 
         disabled_filetypes = {
           "lazy",
-          "neo-tree",
-          "neo-tree-popup",
-          "notify",
           "qf",
           "trouble",
           "toggleterm",
@@ -108,7 +105,7 @@ return {
           v = catppuccin.blue,
           r = catppuccin.teal,
           s = catppuccin.peach,
-          t = catppuccin.blue,
+          t = catppuccin.red,
           c = catppuccin.mauve,
 
           ce = catppuccin.red,
@@ -139,6 +136,12 @@ return {
       padding = {
         right = 1,
       },
+    })
+
+    insert_into_left_section({
+      "filesize",
+
+      cond = conditions.is_buffer_empty,
     })
 
     insert_into_left_section({
@@ -237,7 +240,7 @@ return {
         gui = "bold",
       },
 
-      cond = conditions.hide,
+      cond = conditions.should_hide,
     })
 
     insert_into_right_section({
@@ -255,7 +258,7 @@ return {
       "branch",
 
       color = {
-        fg = catppuccin.violet,
+        fg = catppuccin.lavender,
         gui = "bold",
       },
 
@@ -277,7 +280,7 @@ return {
     insert_into_right_section({
       "diff",
 
-      cond = conditions.hide,
+      cond = conditions.should_hide,
 
       diff_color = {
         added = {

@@ -28,7 +28,6 @@ return {
           "lazy",
           "qf",
           "trouble",
-          "toggleterm",
           "DiffviewFiles",
           "DiffviewFileHistory",
           "TelescopePrompt",
@@ -95,7 +94,7 @@ return {
 
     insert_into_left_section({
       function()
-        return "󰣐"
+        return "󰣐 "
       end,
 
       color = function()
@@ -142,41 +141,33 @@ return {
       "filesize",
 
       cond = conditions.is_buffer_empty,
-    })
-
-    insert_into_left_section({
-      "filename",
-
-      color = {
-        fg = catppuccin.mauve,
-        gui = "bold",
-      },
-
-      cond = conditions.is_buffer_empty,
-    })
-
-    insert_into_left_section({
-      "filetype",
-
-      color = {
-        fg = catppuccin.mauve,
-        gui = "bold",
-      },
-
-      cond = conditions.is_buffer_empty,
-
-      icon_only = true,
-    })
-
-    insert_into_left_section({
-      "filesize",
 
       color = {
         fg = catppuccin.subtext0,
         gui = "bold",
       },
+    })
+
+    insert_into_left_section({
+      "filename",
 
       cond = conditions.is_buffer_empty,
+
+      color = {
+        fg = catppuccin.mauve,
+        gui = "bold",
+      },
+    })
+
+    insert_into_left_section({
+      "filetype",
+
+      cond = conditions.is_buffer_empty,
+      icon_only = true,
+
+      color = {
+        fg = catppuccin.mauve,
+      },
     })
 
     insert_into_left_section({
@@ -192,19 +183,22 @@ return {
 
       color = {
         fg = catppuccin.subtext0,
+        gui = "bold",
       },
     })
 
     insert_into_left_section({
       "diagnostics",
 
-      sources = { "nvim_diagnostic" },
+      sources = {
+        "nvim_diagnostic",
+      },
 
       symbols = {
-        error = "" .. " ",
-        hint = "󰮥" .. " ",
-        info = "" .. " ",
-        warn = "" .. " ",
+        error = " ",
+        hint = "󰮥 ",
+        info = " ",
+        warn = " ",
       },
 
       diagnostics_color = {
@@ -213,11 +207,11 @@ return {
         },
 
         color_hint = {
-          fg = catppuccin.cyan,
+          fg = catppuccin.teal,
         },
 
         color_info = {
-          fg = catppuccin.teal,
+          fg = catppuccin.blue,
         },
 
         color_warn = {
@@ -235,27 +229,29 @@ return {
     insert_into_right_section({
       "o:encoding",
 
+      cond = conditions.should_hide,
+
       color = {
         fg = catppuccin.green,
         gui = "bold",
       },
-
-      cond = conditions.should_hide,
     })
 
     insert_into_right_section({
       "fileformat",
 
+      icons_enabled = true,
+
       color = {
         fg = catppuccin.green,
         gui = "bold",
       },
-
-      icons_enabled = false,
     })
 
     insert_into_right_section({
       "branch",
+
+      icon = " ",
 
       color = {
         fg = catppuccin.lavender,
@@ -273,8 +269,6 @@ return {
 
         return section
       end,
-
-      icon = "",
     })
 
     insert_into_right_section({
@@ -297,9 +291,23 @@ return {
       },
 
       symbols = {
-        added = "" .. " ",
-        modified = "󰝤" .. " ",
-        removed = "" .. " ",
+        added = " ",
+        modified = "󰝤 ",
+        removed = " ",
+      },
+    })
+
+    insert_into_right_section({
+      function()
+        return "▊"
+      end,
+
+      color = {
+        fg = catppuccin.blue,
+      },
+
+      padding = {
+        left = 1,
       },
     })
 

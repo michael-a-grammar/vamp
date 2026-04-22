@@ -5,10 +5,12 @@ return setmetatable({}, {
     })
 
     vim.api.nvim_create_autocmd(event, {
-      group = group,
-      pattern = pattern,
+      -- stylua: ignore start
+      group    = group,
+      pattern  = pattern,
       callback = callback,
-      desc = desc,
+      desc     = desc,
+      -- stylua: ignore end
     })
   end,
 })

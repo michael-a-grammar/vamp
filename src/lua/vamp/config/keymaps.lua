@@ -41,7 +41,7 @@ vim.keymap.set(
   "n",
   "<leader>qf",
   "<cmd>quitall!<cr>",
-  { desc = " " .. "Quit all", noremap = true }
+  { desc = "Force quit all", noremap = true }
 )
 
 vim.keymap.set(
@@ -118,7 +118,7 @@ vim.keymap.set(
   { desc = "Previous tab", noremap = true }
 )
 
-vim.keymap.set("n", "<leader>zv", function()
+vim.keymap.set("n", "<leader>vv", function()
   local is_vamp = string.find(vim.loop.cwd() or "", ".+/vamp.-")
 
   if is_vamp then
@@ -127,7 +127,7 @@ vim.keymap.set("n", "<leader>zv", function()
 
   vim.cmd("!vamp")
   vim.cmd("qa")
-end, { desc = "󰭟 ", noremap = true })
+end, { desc = "Vamp", noremap = true })
 
 vim.keymap.set("i", "jj", "<esc>", { desc = "Normal mode", noremap = false })
 

@@ -6,21 +6,27 @@ local now, now_if_args, later = safely.now, safely.now_if_args, safely.later
 now(function()
   require("mini.basics").setup({
     autocommands = {
-      basic = true,
+      -- stylua: ignore start
+      basic                 = true,
       relnum_in_visual_mode = false,
+      -- stylua: ignore end
     },
 
     mappings = {
-      basic = true,
+      -- stylua: ignore start
+      basic                = true,
       option_toggle_prefix = "<leader>k",
-      move_with_alt = false,
-      windows = false,
+      move_with_alt        = false,
+      windows              = false,
+      -- stylua: ignore end
     },
 
     options = {
-      basic = false,
-      extra_ui = false,
+      -- stylua: ignore start
+      basic       = false,
+      extra_ui    = false,
       win_borders = "auto",
+      -- stylua: ignore end
     },
   })
 end)
@@ -68,21 +74,21 @@ end)
 now(function()
   require("mini.sessions").setup()
 
-  vim.keymap.set("n", "<leader>sc", function()
+  vim.keymap.set("n", "<leader>uc", function()
     vim.ui.input({ prompt = "Session name: " }, MiniSessions.write)
   end, { desc = "New session", noremap = true })
 
-  vim.keymap.set("n", "<leader>sd", function()
+  vim.keymap.set("n", "<leader>ud", function()
     MiniSessions.select("delete")
   end, { desc = "Delete session", noremap = true })
 
-  vim.keymap.set("n", "<leader>ss", function()
+  vim.keymap.set("n", "<leader>uu", function()
     MiniSessions.select("read")
   end, { desc = "Read session", noremap = true })
 
   vim.keymap.set(
     "n",
-    "<leader>sw",
+    "<leader>uw",
     MiniSessions.write,
     { desc = "Write session", noremap = true }
   )
@@ -91,19 +97,21 @@ end)
 now_if_args(function()
   require("mini.files").setup({
     mappings = {
-      close = "<esc>",
-      go_in = "<cr>",
-      go_in_plus = "<c-cr>",
-      go_out = "<bs>",
+      -- stylua: ignore start
+      close       = "<esc>",
+      go_in       = "<cr>",
+      go_in_plus  = "<c-cr>",
+      go_out      = "<bs>",
       go_out_plus = "",
-      mark_goto = "'",
-      mark_set = "m",
-      reset = "u",
-      reveal_cwd = "@",
-      show_help = "g?",
+      mark_goto   = "'",
+      mark_set    = "m",
+      reset       = "u",
+      reveal_cwd  = "@",
+      show_help   = "g?",
       synchronize = "w",
-      trim_left = "<",
-      trim_right = ">",
+      trim_left   = "<",
+      trim_right  = ">",
+      -- stylua: ignore start
     },
 
     options = {
@@ -119,15 +127,15 @@ now_if_args(function()
     if not MiniFiles.close() then
       MiniFiles.open()
     end
-  end, { desc = "Files", noremap = true })
+  end, { desc = "Explore", noremap = true })
 
   vim.keymap.set("n", "<leader>fd", function()
     MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
-  end, { desc = " Files", noremap = true })
+  end, { desc = "Explore from buffer directory", noremap = true })
 
   vim.keymap.set("n", "<leader>ff", function()
     MiniFiles.open(nil, false)
-  end, { desc = " Files", noremap = true })
+  end, { desc = "Explore from working directory", noremap = true })
 
   local show_dotfiles = true
 
@@ -186,6 +194,7 @@ now_if_args(function()
       "belowright horizontal",
       "Split horizontally"
     )
+
     split_win_keymap(buf_id, "<c-v>", "belowright vertical", "Split vertically")
   end)
 
@@ -194,11 +203,11 @@ now_if_args(function()
   end
 
   new_autocmd("User", "MiniFilesExplorerOpen", function()
-    set_bookmark("~", "~/", " ")
-    set_bookmark("c", vim.fn.getcwd, " ")
-    set_bookmark("d", "~/dev/me/dot-files", " ")
-    set_bookmark("p", "~/dev/prima", " ")
-    set_bookmark("v", "~/dev/me/vamp", "󰭟 ")
+    set_bookmark("~", "~/", "Home")
+    set_bookmark("c", vim.fn.getcwd, "Working directory")
+    set_bookmark("d", "~/dev/me/dot-files", "Dot files")
+    set_bookmark("p", "~/dev/prima", "Prima")
+    set_bookmark("v", "~/dev/me/vamp", "Vamp")
   end, "Add bookmarks to MiniFiles")
 end)
 
@@ -214,7 +223,7 @@ now_if_args(function()
     "n",
     "<leader>h",
     MiniMisc.zoom,
-    { desc = "󰍉 ", noremap = true }
+    { desc = "Zoom", noremap = true }
   )
 
   vim.keymap.set(
@@ -226,6 +235,10 @@ now_if_args(function()
 
   MiniMisc.setup_auto_root()
   MiniMisc.setup_restore_cursor()
+
+  new_autocmd("DirChanged", "*", function(args)
+    vim.notify("Directory changed to " .. args.file .. " ")
+  end)
 end)
 
 later(function()
@@ -268,15 +281,7 @@ later(function()
 end)
 
 later(function()
-  require("mini.bracketed").setup({
-    buffer = {
-      suffix = "",
-    },
-
-    window = {
-      suffix = "",
-    },
-  })
+  require("mini.bracketed").setup()
 
   vim.keymap.set("n", "<leader>tn", function()
     MiniBracketed.buffer("forward")
@@ -322,7 +327,7 @@ later(function()
 
   vim.keymap.set({ "n", "x" }, "<leader>nx", function()
     MiniBufremove.delete(0, true)
-  end, { desc = "" .. " Close buffer", noremap = true })
+  end, { desc = "Force close buffer", noremap = true })
 end)
 
 later(function()
@@ -332,23 +337,42 @@ later(function()
     clues = {
       {
         -- stylua: ignore start
-        { mode = "n", keys = "<Leader>a", desc = "+Notifications" },
-        { mode = "n", keys = "<Leader>f", desc = "+Navigation"    },
-        { mode = "n", keys = "<Leader>g", desc = "+Git"           },
-        { mode = "n", keys = "<Leader>k", desc = "+Toggles"       },
-        { mode = "n", keys = "<Leader>n", desc = "+Buffer"        },
-        { mode = "n", keys = "<Leader>q", desc = "+Quit"          },
-        { mode = "n", keys = "<Leader>r", desc = "+Terminal"      },
-        { mode = "n", keys = "<Leader>s", desc = "+Session"       },
-        { mode = "n", keys = "<Leader>t", desc = "+Terminal"      },
-        { mode = "n", keys = "<Leader>y", desc = "+Tabs"          },
-        { mode = "n", keys = "<Leader>w", desc = "+Windows"       },
-        { mode = "n", keys = "<Leader>z", desc = "+ "            },
+        { mode = "n", keys = "<leader>a", desc = "+Notifications" },
+        { mode = "n", keys = "<leader>f", desc = "+Navigation"    },
+        { mode = "n", keys = "<leader>g", desc = "+Git"           },
+        { mode = "n", keys = "<leader>k", desc = "+Toggles"       },
+        { mode = "n", keys = "<leader>n", desc = "+Buffer"        },
+        { mode = "n", keys = "<leader>q", desc = "+Quit"          },
+        { mode = "n", keys = "<leader>r", desc = "+Terminal"      },
+        { mode = "n", keys = "<leader>s", desc = "+Find"          },
+        { mode = "n", keys = "<leader>t", desc = "+Buffers"       },
+        { mode = "n", keys = "<leader>u", desc = "+Session"       },
+        { mode = "n", keys = "<leader>v", desc = "+Vim"           },
+        { mode = "n", keys = "<leader>w", desc = "+Windows"       },
+        { mode = "n", keys = "<leader>y", desc = "+Tabs"          },
 
-        { mode = "n", keys = "<Leader>e", desc = "+Explore/Edit"  },
-        { mode = "n", keys = "<Leader>m", desc = "+Map"           },
-        { mode = "n", keys = "<Leader>o", desc = "+Other"         },
-        { mode = "n", keys = "<Leader>v", desc = "+Visits"        },
+        { mode = "n", keys = "<leader>gh", desc = "+Hunks"     },
+        { mode = "n", keys = "<leader>nf", desc = "+Copy path" },
+
+        { mode = "n", keys = "<leader>ghf", postkeys = "<leader>gh" },
+        { mode = "n", keys = "<leader>ghl", postkeys = "<leader>gh" },
+        { mode = "n", keys = "<leader>ghn", postkeys = "<leader>gh" },
+        { mode = "n", keys = "<leader>ghp", postkeys = "<leader>gh" },
+        { mode = "n", keys = "<leader>tn",  postkeys = "<leader>t"  },
+        { mode = "n", keys = "<leader>tp",  postkeys = "<leader>t"  },
+        { mode = "n", keys = "<leader>wf",  postkeys = "<leader>w"  },
+        { mode = "n", keys = "<leader>wl",  postkeys = "<leader>w"  },
+        { mode = "n", keys = "<leader>wn",  postkeys = "<leader>w"  },
+        { mode = "n", keys = "<leader>wp",  postkeys = "<leader>w"  },
+        { mode = "n", keys = "<leader>yf",  postkeys = "<leader>y"  },
+        { mode = "n", keys = "<leader>yl",  postkeys = "<leader>y"  },
+        { mode = "n", keys = "<leader>yn",  postkeys = "<leader>y"  },
+        { mode = "n", keys = "<leader>yp",  postkeys = "<leader>y"  },
+
+        -- { mode = "n", keys = "<Leader>e", desc = "+Explore/Edit"  },
+        -- { mode = "n", keys = "<Leader>m", desc = "+Map"           },
+        -- { mode = "n", keys = "<Leader>o", desc = "+Other"         },
+        -- { mode = "n", keys = "<Leader>v", desc = "+Visits"        },
         -- stylua: ignore end
       },
 
@@ -359,9 +383,11 @@ later(function()
       mini_clue.gen_clues.square_brackets(),
 
       mini_clue.gen_clues.windows({
-        submode_move = true,
+        -- stylua: ignore start
+        submode_move     = true,
         submode_navigate = true,
-        submode_resize = true,
+        submode_resize   = true,
+        -- stylua: ignore end
       }),
 
       mini_clue.gen_clues.z(),
@@ -386,13 +412,83 @@ later(function()
     },
 
     window = {
-      delay = 500,
+      -- stylua: ignore start
+      delay       = 500,
       scroll_down = "<c-f>",
-      scroll_up = "<c-p>",
-
-      config = {
-        width = "auto",
-      },
+      scroll_up   = "<c-p>",
+      -- stylua: ignore end
     },
   })
+end)
+
+later(function()
+  require("mini.cmdline").setup({
+    autocomplete = {
+      delay = 100,
+    },
+
+    autocorrect = {
+      enable = false,
+    },
+  })
+end)
+
+-- later(function()
+-- require('mini.colors').setup()
+-- end)
+
+later(function()
+  require("mini.comment").setup()
+end)
+
+later(function()
+  require("mini.cursorword").setup({
+    delay = 1000,
+  })
+
+  vim.api.nvim_set_hl(0, "MiniCursorword", {
+    bold = true,
+  })
+
+  vim.api.nvim_set_hl(0, "MiniCursorwordCurrent", {})
+end)
+
+later(function()
+  require("mini.diff").setup()
+
+  vim.keymap.set("n", "<leader>gd", function()
+    MiniDiff.toggle_overlay()
+  end, { desc = "Toggle overlay", noremap = true })
+
+  vim.keymap.set("n", "<leader>gr", function()
+    return MiniDiff.operator("reset") .. "_"
+  end, { desc = "Reset line", expr = true, remap = true })
+
+  vim.keymap.set("n", "<leader>gs", function()
+    return MiniDiff.operator("apply") .. "_"
+  end, { desc = "Stage line", expr = true, remap = true })
+
+  vim.keymap.set("n", "<leader>ghf", function()
+    MiniDiff.goto_hunk("first")
+  end, { desc = "First hunk", noremap = true })
+
+  vim.keymap.set("n", "<leader>ghl", function()
+    MiniDiff.goto_hunk("last")
+  end, { desc = "Last hunk", noremap = true })
+
+  vim.keymap.set("n", "<leader>ghn", function()
+    MiniDiff.goto_hunk("forward")
+  end, { desc = "Next hunk", noremap = true })
+
+  vim.keymap.set("n", "<leader>ghp", function()
+    MiniDiff.goto_hunk("backward")
+  end, { desc = "Previous hunk", noremap = true })
+
+  vim.keymap.set("n", "<leader>ghr", function()
+    return MiniDiff.operator("reset") .. "gh"
+  end, { desc = "Reset hunk", expr = true, remap = true })
+
+  vim.keymap.set("n", "<leader>ghs", function()
+    return MiniDiff.operator("apply") .. "gh"
+  end, { desc = "Stage hunk", expr = true, remap = true })
 end)

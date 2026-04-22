@@ -492,3 +492,10 @@ later(function()
     return MiniDiff.operator("apply") .. "gh"
   end, { desc = "Stage hunk", expr = true, remap = true })
 end)
+
+later(function()
+  require("mini.git").setup()
+
+  vim.keymap.set("n", "<leader>gc", MiniGit.show_at_cursor,
+  { desc = "Show at cursor", noremap = true })
+end)

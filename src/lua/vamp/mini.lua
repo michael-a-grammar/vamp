@@ -491,11 +491,32 @@ later(function()
   vim.keymap.set("n", "<leader>ghs", function()
     return MiniDiff.operator("apply") .. "gh"
   end, { desc = "Stage hunk", expr = true, remap = true })
+
+  vim.keymap.set("x", "<leader>ghr", function()
+    return "gH"
+  end, { desc = "Reset hunk", expr = true, remap = true })
+
+  vim.keymap.set("x", "<leader>ghs", function()
+    return "gh"
+  end, { desc = "Stage hunk", expr = true, remap = true })
 end)
 
 later(function()
   require("mini.git").setup()
 
-  vim.keymap.set("n", "<leader>gc", MiniGit.show_at_cursor,
-  { desc = "Show at cursor", noremap = true })
+  vim.keymap.set(
+    { "n", "x" },
+    "<leader>gc",
+    MiniGit.show_at_cursor,
+    { desc = "Show history / diff source", noremap = true }
+  )
+
+  vim.keymap.set("n", "<leader>gg", function()
+    MiniGit.show_range_history({
+        -- stylua: ignore start
+        line_start = 1,
+        line_end   = vim.api.nvim_buf_line_count(0),
+      -- stylua: ignore end
+    })
+  end, { desc = "Show file history", noremap = true })
 end)

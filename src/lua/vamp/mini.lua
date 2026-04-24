@@ -1,5 +1,7 @@
+-- stylua: ignore start
 local new_autocmd = require("vamp.lib.new_autocmd")
-local safely = require("vamp.lib.safely")
+local safely      = require("vamp.lib.safely")
+-- stylua: ignore end
 
 local now, now_if_args, later = safely.now, safely.now_if_args, safely.later
 
@@ -29,6 +31,16 @@ now(function()
       -- stylua: ignore end
     },
   })
+
+  vim.o.showtabline = 0
+
+  vim.keymap.set("n", "<leader>kt", function()
+    if vim.o.showtabline == 0 then
+      vim.o.showtabline = 1
+    else
+      vim.o.showtabline = 0
+    end
+  end, { desc = "Toggle tabline", noremap = true })
 end)
 
 now(function()
@@ -176,7 +188,7 @@ now_if_args(function()
     vim.keymap.set("n", lhs, rhs, { desc = desc, buffer = buf_id })
   end
 
-  -- TODO: Yank path, set current working directory, open with default system handler
+  -- TODO: Yank path, set current working directory, open with default system handler, pick from directory
 
   new_autocmd("User", "MiniFilesBufferCreate", function(args)
     local buf_id = args.data.buf_id
@@ -352,7 +364,7 @@ later(function()
         { mode = "n", keys = "<leader>y", desc = "+Tabs"          },
 
         { mode = "n", keys = "<leader>gh", desc = "+Hunks"     },
-        { mode = "n", keys = "<leader>nf", desc = "+Copy path" },
+        { mode = "n", keys = "<leader>nf", desc = "+Path" },
 
         { mode = "n", keys = "<leader>ghf", postkeys = "<leader>gh" },
         { mode = "n", keys = "<leader>ghl", postkeys = "<leader>gh" },
@@ -504,14 +516,7 @@ end)
 later(function()
   require("mini.git").setup()
 
-  vim.keymap.set(
-    { "n", "x" },
-    "<leader>gc",
-    MiniGit.show_at_cursor,
-    { desc = "Show history / diff source", noremap = true }
-  )
-
-  vim.keymap.set("n", "<leader>gg", function()
+  vim.keymap.set("n", "<leader>gf", function()
     MiniGit.show_range_history({
         -- stylua: ignore start
         line_start = 1,
@@ -519,4 +524,136 @@ later(function()
       -- stylua: ignore end
     })
   end, { desc = "Show file history", noremap = true })
+
+  vim.keymap.set(
+    { "n", "x" },
+    "<leader>gg",
+    MiniGit.show_at_cursor,
+    { desc = "Show history / diff source", noremap = true }
+  )
+
+  vim.keymap.set("n", "<leader>gl", function()
+    vim.cmd("vertical Git blame -- %")
+  end, { desc = "Show blame", noremap = true })
+
+  vim.keymap.set("n", "<leader>go", function()
+    vim.cmd("vertical Git log --oneline")
+  end, { desc = "Show log", noremap = true })
+
+  new_autocmd("User", "MiniGitCommandSplit", function(args)
+    if args.data.git_subcommand ~= "blame" then
+      return
+    end
+
+    local win_source = args.data.win_source
+
+    vim.wo.wrap = false
+
+    vim.fn.winrestview({
+      topline = vim.fn.line("w0", win_source),
+    })
+
+    vim.api.nvim_win_set_cursor(0, {
+      vim.fn.line(".", win_source),
+      0,
+    })
+
+    vim.wo[win_source].scrollbind, vim.wo.scrollbind = true, true
+  end)
+end)
+
+later(function()
+  local mini_hipatterns = require("mini.hipatterns")
+
+  local words = MiniExtra.gen_highlighter.words
+
+  mini_hipatterns.setup({
+    highlighters = {
+      hex_color = mini_hipatterns.gen_highlighter.hex_color(),
+
+      fixme = words({
+        "FIXME",
+        "Fixme",
+        "fixme",
+      }, "MiniHipatternsFixme"),
+
+      hack = words({
+        "HACK",
+        "Hack",
+        "hack",
+      }, "MiniHipatternsHack"),
+
+      todo = words({
+        "TODO",
+        "Todo",
+        "todo",
+      }, "MiniHipatternsTodo"),
+    },
+  })
+end)
+
+later(function()
+  require("mini.indentscope").setup()
+end)
+
+later(function()
+  require("mini.jump").setup({
+    delay = {
+      highlight = 500,
+      idle_stop = 2000000,
+    },
+  })
+
+  vim.keymap.set({ "n", "x", "o" }, "<esc>", function()
+    if not MiniJump.state.jumping then
+      return "<esc>"
+    end
+
+    MiniJump.stop_jumping()
+  end, {
+    -- stylua: ignore start
+    desc  = "Return to normal mode / cancel jumping",
+    expr  = true,
+    remap = true,
+    -- stylua: ignore start
+  })
+end)
+
+later(function()
+  require("mini.jump2d").setup({
+    labels = "ntesiroamghdkvclpufxzufq",
+
+    mappings = {
+      start_jumping = "",
+    },
+  })
+
+  local line_start_opts = MiniJump2d.builtin_opts.line_start
+
+  local start_mini_jump2d = function(cursor_after)
+    MiniJump2d.start(vim.tbl_deep_extend("force", line_start_opts, {
+      allowed_lines = {
+        -- stylua: ignore start
+        cursor_before = not cursor_after,
+        cursor_at     = false,
+        cursor_after  = cursor_after,
+        -- stylua: ignore end
+      },
+
+      allowed_windows = {
+        -- stylua: ignore start
+        current     = true,
+        not_current = false,
+        -- stylua: ignore end
+      },
+    }))
+  end
+
+  vim.keymap.set({ "n", "x" }, "<bs>p", function()
+    start_mini_jump2d(false)
+  end, { desc = "", noremap = true })
+
+  vim.keymap.set({ "n", "x" }, "<bs>f", function()
+    start_mini_jump2d(true)
+  end, { desc = "", noremap = true })
 end)

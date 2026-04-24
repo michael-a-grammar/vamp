@@ -1,5 +1,9 @@
 vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
 
+_G.vamp = {}
+
+_G.vamp.catppuccin_theme = "mocha"
+
 _G.Config = {}
 
 local misc = require("mini.misc")

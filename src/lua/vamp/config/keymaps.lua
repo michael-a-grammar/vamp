@@ -1,18 +1,28 @@
-vim.keymap.set("n", "<c-f>", "<c-d>", { desc = "Scroll down", noremap = true })
+vim.keymap.set(
+  { "n", "x" },
+  "<c-f>",
+  "<c-d>",
+  { desc = "Scroll down", noremap = true }
+)
 
-vim.keymap.set("n", "<c-p>", "<c-u>", { desc = "Scroll up", noremap = true })
+vim.keymap.set(
+  { "n", "x" },
+  "<c-p>",
+  "<c-u>",
+  { desc = "Scroll up", noremap = true }
+)
 
 vim.keymap.set(
   "n",
   "[p",
-  '<Cmd>exe "iput! " . v:register<CR>',
+  '<cmd>exe "iput! " . v:register<cr>',
   { desc = "Paste above", noremap = true }
 )
 
 vim.keymap.set(
   "n",
   "]p",
-  '<Cmd>exe "iput " . v:register<CR>',
+  '<cmd>exe "iput " . v:register<cr>',
   { desc = "Paste below", noremap = true }
 )
 
@@ -23,6 +33,13 @@ vim.keymap.set(
   "<leader><tab>",
   "<c-^>",
   { desc = "Previous buffer", noremap = true }
+)
+
+vim.keymap.set(
+  "n",
+  "<leader>nt",
+  "<cmd>tab split<cr>",
+  { desc = "Open buffer in new tab", noremap = true }
 )
 
 vim.keymap.set("n", "<leader>nff", function()
@@ -78,6 +95,45 @@ end, { desc = "New scratch buffer", noremap = true })
 
 vim.keymap.set(
   "n",
+  "<leader>yp",
+  "<cmd>tabprevious<cr>",
+  { desc = "Previous tab", noremap = true }
+)
+
+vim.keymap.set("n", "<leader>vv", function()
+  local is_vamp = string.find(vim.loop.cwd() or "", ".+/vamp.-")
+
+  if is_vamp then
+    vim.cmd("wa")
+  end
+
+  vim.cmd("!vamp")
+  vim.cmd("qa")
+end, { desc = "Vamp", noremap = true })
+
+vim.keymap.set(
+  "n",
+  "<leader>wd",
+  "<cmd>close<cr>",
+  { desc = "Close window", noremap = true }
+)
+
+vim.keymap.set(
+  "n",
+  "<leader>wo",
+  "<cmd>only<cr>",
+  { desc = "Close other windows", noremap = true }
+)
+
+vim.keymap.set(
+  "n",
+  "<leader>ww",
+  "<c-w><c-p>",
+  { desc = "Change to previous window", noremap = true }
+)
+
+vim.keymap.set(
+  "n",
   "<leader>yc",
   "<cmd>tabnew<cr>",
   { desc = "New tab", noremap = true }
@@ -110,24 +166,6 @@ vim.keymap.set(
   "<cmd>tabnext<cr>",
   { desc = "Next tab", noremap = true }
 )
-
-vim.keymap.set(
-  "n",
-  "<leader>yp",
-  "<cmd>tabprevious<cr>",
-  { desc = "Previous tab", noremap = true }
-)
-
-vim.keymap.set("n", "<leader>vv", function()
-  local is_vamp = string.find(vim.loop.cwd() or "", ".+/vamp.-")
-
-  if is_vamp then
-    vim.cmd("wa")
-  end
-
-  vim.cmd("!vamp")
-  vim.cmd("qa")
-end, { desc = "Vamp", noremap = true })
 
 vim.keymap.set("i", "jj", "<esc>", { desc = "Normal mode", noremap = false })
 

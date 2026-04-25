@@ -657,3 +657,38 @@ later(function()
     start_mini_jump2d(true)
   end, { desc = "", noremap = true })
 end)
+
+later(function()
+  require("mini.keymap").setup()
+end)
+
+later(function()
+  local map = require("mini.map")
+  map.setup({
+    integrations = {
+      map.gen_integration.builtin_search(),
+      map.gen_integration.diff(),
+      map.gen_integration.diagnostic(),
+    },
+
+    symbols = {
+      encode = map.gen_encode_symbols.dot("4x2"),
+    },
+  })
+
+  for _, key in ipairs({ "n", "N", "*", "#" }) do
+    local rhs = key
+      .. "zv"
+      .. "<cmd>lua MiniMap.refresh({}, { lines = false, scrollbar = false })<cr>"
+
+    vim.keymap.set("n", key, rhs)
+  end
+end)
+
+later(function()
+  require("mini.move").setup()
+end)
+
+later(function()
+  require("mini.operators").setup()
+end)

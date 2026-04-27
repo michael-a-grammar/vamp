@@ -233,7 +233,7 @@ now_if_args(function()
 
   vim.keymap.set(
     "n",
-    "<leader>oz",
+    "<leader>z",
     MiniMisc.zoom,
     { desc = "Zoom", noremap = true }
   )
@@ -354,7 +354,7 @@ later(function()
         { mode = "n", keys = "<leader>g", desc = "+Git"           },
         { mode = "n", keys = "<leader>k", desc = "+Toggles"       },
         { mode = "n", keys = "<leader>n", desc = "+Buffer"        },
-        { mode = "n", keys = "<leader>n", desc = "+Other"         },
+        { mode = "n", keys = "<leader>m", desc = "+Map"           },
         { mode = "n", keys = "<leader>q", desc = "+Quit"          },
         { mode = "n", keys = "<leader>r", desc = "+Terminal"      },
         { mode = "n", keys = "<leader>s", desc = "+Find"          },
@@ -541,10 +541,17 @@ later(function()
   end, { desc = "Show history", noremap = true })
 
   vim.keymap.set(
-    { "n", "x" },
+    "n",
     "<leader>gg",
     MiniGit.show_at_cursor,
-    { desc = "Show history / diff source", noremap = true }
+    { desc = "Show line history / diff source", noremap = true }
+  )
+
+  vim.keymap.set(
+    "x",
+    "<leader>gg",
+    MiniGit.show_at_cursor,
+    { desc = "Show range history / diff source", noremap = true }
   )
 
   vim.keymap.set(
@@ -557,7 +564,7 @@ later(function()
   vim.keymap.set(
     "n",
     "<leader>go",
-    "<cmd>vertical Git log --oneline<cr>",
+    [[<cmd>vertical Git log --pretty=format:\%h\ \%as\ │\ \%s --topo-order<cr>]],
     { desc = "Show log", noremap = true }
   )
 
@@ -649,10 +656,10 @@ later(function()
     },
   })
 
-  local line_start_opts = MiniJump2d.builtin_opts.line_start
+  local start_opts = MiniJump2d.builtin_opts.word_start
 
-  local start_mini_jump2d = function(cursor_after)
-    MiniJump2d.start(vim.tbl_deep_extend("force", line_start_opts, {
+  local start_mini_jump2d = function(cursor_after, current)
+    MiniJump2d.start(vim.tbl_deep_extend("force", start_opts, {
       allowed_lines = {
         -- stylua: ignore start
         cursor_before = not cursor_after,
@@ -663,20 +670,22 @@ later(function()
 
       allowed_windows = {
         -- stylua: ignore start
-        current     = true,
-        not_current = false,
+        current     = current,
+        not_current = not current,
         -- stylua: ignore end
       },
     }))
   end
 
-  vim.keymap.set({ "n", "x" }, "<bs>p", function()
-    start_mini_jump2d(false)
-  end, { desc = "", noremap = true })
-
   vim.keymap.set({ "n", "x" }, "<bs>f", function()
-    start_mini_jump2d(true)
-  end, { desc = "", noremap = true })
+    start_mini_jump2d(true, true)
+    vim.cmd("normal! zvzz")
+  end, { desc = "Jump forward", noremap = true })
+
+  vim.keymap.set({ "n", "x" }, "<bs>p", function()
+    start_mini_jump2d(false, true)
+    vim.cmd("normal! zvzz")
+  end, { desc = "Jump backward", noremap = true })
 end)
 
 later(function()
@@ -697,8 +706,26 @@ later(function()
     },
   })
 
+  vim.keymap.set(
+    "n",
+    "if",
+    MiniMap.toggle_focus,
+    { desc = "Focus", noremap = true }
+  )
+
+  vim.keymap.set(
+    "n",
+    "ii",
+    MiniMap.toggle,
+    "Toggle",
+    { desc = "Toggle", noremap = true }
+  )
+
+  nmap_leader("ir", "<Cmd>lua MiniMap.refresh()<CR>", "Refresh")
+
   for _, key in ipairs({ "n", "N", "*", "#" }) do
     local rhs = key
+      .. "zz"
       .. "zv"
       .. "<cmd>lua MiniMap.refresh({}, { lines = false, scrollbar = false })<cr>"
 
@@ -712,4 +739,8 @@ end)
 
 later(function()
   require("mini.operators").setup()
+end)
+
+later(function()
+  require("mini.pick").setup()
 end)

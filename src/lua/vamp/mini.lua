@@ -233,14 +233,14 @@ now_if_args(function()
 
   vim.keymap.set(
     "n",
-    "<leader>h",
+    "<leader>oz",
     MiniMisc.zoom,
     { desc = "Zoom", noremap = true }
   )
 
   vim.keymap.set(
     "n",
-    "<leader>wr",
+    "<leader>w=",
     MiniMisc.resize_window,
     { desc = "Resize window to editable width", noremap = true }
   )
@@ -354,6 +354,7 @@ later(function()
         { mode = "n", keys = "<leader>g", desc = "+Git"           },
         { mode = "n", keys = "<leader>k", desc = "+Toggles"       },
         { mode = "n", keys = "<leader>n", desc = "+Buffer"        },
+        { mode = "n", keys = "<leader>n", desc = "+Other"         },
         { mode = "n", keys = "<leader>q", desc = "+Quit"          },
         { mode = "n", keys = "<leader>r", desc = "+Terminal"      },
         { mode = "n", keys = "<leader>s", desc = "+Find"          },
@@ -363,8 +364,8 @@ later(function()
         { mode = "n", keys = "<leader>w", desc = "+Windows"       },
         { mode = "n", keys = "<leader>y", desc = "+Tabs"          },
 
-        { mode = "n", keys = "<leader>gh", desc = "+Hunks"     },
-        { mode = "n", keys = "<leader>nf", desc = "+Path" },
+        { mode = "n", keys = "<leader>gh", desc = "+Hunks" },
+        { mode = "n", keys = "<leader>nf", desc = "+Path"  },
 
         { mode = "n", keys = "<leader>ghf", postkeys = "<leader>gh" },
         { mode = "n", keys = "<leader>ghl", postkeys = "<leader>gh" },
@@ -445,9 +446,9 @@ later(function()
   })
 end)
 
--- later(function()
--- require('mini.colors').setup()
--- end)
+later(function()
+  require("mini.colors").setup()
+end)
 
 later(function()
   require("mini.comment").setup()
@@ -516,14 +517,28 @@ end)
 later(function()
   require("mini.git").setup()
 
+  vim.keymap.set(
+    "n",
+    "<leader>ga",
+    "<cmd>Git add %<cr>",
+    { desc = "Stage", noremap = true }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<leader>gc",
+    "<cmd>Git commit<cr>",
+    { desc = "Commit", noremap = true }
+  )
+
   vim.keymap.set("n", "<leader>gf", function()
     MiniGit.show_range_history({
-        -- stylua: ignore start
-        line_start = 1,
-        line_end   = vim.api.nvim_buf_line_count(0),
+      -- stylua: ignore start
+      line_start = 1,
+      line_end   = vim.api.nvim_buf_line_count(0),
       -- stylua: ignore end
     })
-  end, { desc = "Show file history", noremap = true })
+  end, { desc = "Show history", noremap = true })
 
   vim.keymap.set(
     { "n", "x" },
@@ -532,13 +547,19 @@ later(function()
     { desc = "Show history / diff source", noremap = true }
   )
 
-  vim.keymap.set("n", "<leader>gl", function()
-    vim.cmd("vertical Git blame -- %")
-  end, { desc = "Show blame", noremap = true })
+  vim.keymap.set(
+    "n",
+    "<leader>gl",
+    "<cmd>vertical Git blame -- %<cr>",
+    { desc = "Show blame", noremap = true }
+  )
 
-  vim.keymap.set("n", "<leader>go", function()
-    vim.cmd("vertical Git log --oneline")
-  end, { desc = "Show log", noremap = true })
+  vim.keymap.set(
+    "n",
+    "<leader>go",
+    "<cmd>vertical Git log --oneline<cr>",
+    { desc = "Show log", noremap = true }
+  )
 
   new_autocmd("User", "MiniGitCommandSplit", function(args)
     if args.data.git_subcommand ~= "blame" then

@@ -43,15 +43,15 @@ vim.keymap.set(
 )
 
 vim.keymap.set("n", "<leader>nff", function()
-  vim.fn.setreg("+", vim.fn.expand("%:p:t"))
+  vim.fn.setreg(vim.v.register, vim.fn.expand("%:p:t"))
 end, { desc = "Copy filename", noremap = true })
 
 vim.keymap.set("n", "<leader>nfp", function()
-  vim.fn.setreg("+", vim.fn.expand("%:p:h"))
+  vim.fn.setreg(vim.v.register, vim.fn.expand("%:p:h"))
 end, { desc = "Copy directory path", noremap = true })
 
 vim.keymap.set("n", "<leader>nfr", function()
-  vim.fn.setreg("+", vim.fn.expand("%:p"))
+  vim.fn.setreg(vim.v.register, vim.fn.expand("%:p"))
 end, { desc = "Copy full path", noremap = true })
 
 vim.keymap.set(

@@ -101,11 +101,6 @@ local git_log_buf_cmd = git_log_cmd .. ' --follow -- %'
 -- nmap_leader('gL', '<Cmd>' .. git_log_buf_cmd .. '<CR>',     'Log buffer')
 -- nmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>',  'Show at cursor')
 
-xmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>', 'Show at selection')
-
-nmap_leader('lf', '<Cmd>lua require("conform").format()<CR>',   'Format')
-xmap_leader('lf', '<Cmd>lua require("conform").format()<CR>', 'Format selection')
-
 -- m is for 'Map'. Common usage:
 -- - `<Leader>mt` - toggle map from 'mini.map' (closed by default)
 -- - `<Leader>mf` - focus on the map for fast navigation

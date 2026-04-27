@@ -1,16 +1,6 @@
-vim.keymap.set(
-  { "n", "x" },
-  "<c-f>",
-  "<c-d>",
-  { desc = "Scroll down", noremap = true }
-)
+vim.keymap.set({ "n", "x" }, "<c-f>", "<c-d>zzzv")
 
-vim.keymap.set(
-  { "n", "x" },
-  "<c-p>",
-  "<c-u>",
-  { desc = "Scroll up", noremap = true }
-)
+vim.keymap.set({ "n", "x" }, "<c-p>", "<c-u>zzzv")
 
 vim.keymap.set(
   "n",
@@ -26,13 +16,13 @@ vim.keymap.set(
   { desc = "Paste below", noremap = true }
 )
 
-vim.keymap.set("n", "U", "<c-r>", { desc = "Redo", noremap = true })
+vim.keymap.set("n", "U", "<c-r>")
 
 vim.keymap.set(
   "n",
   "<leader><tab>",
   "<c-^>",
-  { desc = "Previous buffer", noremap = true }
+  { desc = "Alternative buffer", noremap = true }
 )
 
 vim.keymap.set(
@@ -104,11 +94,11 @@ vim.keymap.set("n", "<leader>vv", function()
   local is_vamp = string.find(vim.loop.cwd() or "", ".+/vamp.-")
 
   if is_vamp then
-    vim.cmd("wa")
+    vim.cmd("wall")
   end
 
   vim.cmd("!vamp")
-  vim.cmd("qa")
+  vim.cmd("restart")
 end, { desc = "Vamp", noremap = true })
 
 vim.keymap.set(

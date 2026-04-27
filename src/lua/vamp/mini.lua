@@ -352,6 +352,7 @@ later(function()
         { mode = "n", keys = "<leader>a", desc = "+Notifications" },
         { mode = "n", keys = "<leader>f", desc = "+Navigation"    },
         { mode = "n", keys = "<leader>g", desc = "+Git"           },
+        { mode = "n", keys = "<leader>i", desc = "+Map"           },
         { mode = "n", keys = "<leader>k", desc = "+Toggles"       },
         { mode = "n", keys = "<leader>n", desc = "+Buffer"        },
         { mode = "n", keys = "<leader>m", desc = "+Map"           },
@@ -693,16 +694,17 @@ later(function()
 end)
 
 later(function()
-  local map = require("mini.map")
-  map.setup({
+  local mini_map = require("mini.map")
+
+  mini_map.setup({
     integrations = {
-      map.gen_integration.builtin_search(),
-      map.gen_integration.diff(),
-      map.gen_integration.diagnostic(),
+      mini_map.gen_integration.builtin_search(),
+      mini_map.gen_integration.diff(),
+      mini_map.gen_integration.diagnostic(),
     },
 
     symbols = {
-      encode = map.gen_encode_symbols.dot("4x2"),
+      encode = mini_map.gen_encode_symbols.dot("4x2"),
     },
   })
 
@@ -713,15 +715,14 @@ later(function()
     { desc = "Focus", noremap = true }
   )
 
+  vim.keymap.set("n", "ii", MiniMap.toggle, { desc = "Toggle", noremap = true })
+
   vim.keymap.set(
     "n",
-    "ii",
-    MiniMap.toggle,
-    "Toggle",
-    { desc = "Toggle", noremap = true }
+    "ir",
+    MiniMap.refresh,
+    { desc = "Refresh", noremap = true }
   )
-
-  nmap_leader("ir", "<Cmd>lua MiniMap.refresh()<CR>", "Refresh")
 
   for _, key in ipairs({ "n", "N", "*", "#" }) do
     local rhs = key

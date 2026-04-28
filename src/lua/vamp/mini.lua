@@ -710,16 +710,21 @@ later(function()
 
   vim.keymap.set(
     "n",
-    "if",
+    "<leader>if",
     MiniMap.toggle_focus,
     { desc = "Focus", noremap = true }
   )
 
-  vim.keymap.set("n", "ii", MiniMap.toggle, { desc = "Toggle", noremap = true })
+  vim.keymap.set(
+    "n",
+    "<leader>ii",
+    MiniMap.toggle,
+    { desc = "Toggle", noremap = true }
+  )
 
   vim.keymap.set(
     "n",
-    "ir",
+    "<leader>ir",
     MiniMap.refresh,
     { desc = "Refresh", noremap = true }
   )
@@ -744,4 +749,59 @@ end)
 
 later(function()
   require("mini.pick").setup()
+
+  -- '
+  -- *
+  -- ,
+  -- /
+  -- ?
+
+  vim.keymap.set(
+    "n",
+    "<leader><space>",
+    "<cmd>Pick files<cr>",
+    { desc = "Files", noremap = true }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<leader>'",
+    "<cmd>Pick resume<cr>",
+    { desc = "Resume previous picker", noremap = true }
+  )
+  vim.keymap.set(
+
+    "n",
+    "<leader>*",
+    '<cmd>Pick grep pattern="<cword>"<cr>',
+    { desc = "Grep current word", noremap = true }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<leader>,",
+    "<cmd>Pick buffers<cr>",
+    { desc = "Buffers", noremap = true }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<leader>/",
+    "<cmd>Pick grep_live<cr>",
+    { desc = "Grep", noremap = true }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<leader>?",
+    "<cmd>Pick help<cr>",
+    { desc = "Help", noremap = true }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<leader>nn",
+    '<cmd>Pick buf_lines scope="current"<cr>',
+    { desc = "Grep", noremap = true }
+  )
 end)

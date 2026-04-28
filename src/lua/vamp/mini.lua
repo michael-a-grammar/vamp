@@ -255,6 +255,65 @@ end)
 
 later(function()
   require("mini.extra").setup()
+
+  vim.keymap.set("n", "<leader>nn", function()
+    MiniExtra.pickers.buf_lines({
+      scope = "current",
+    })
+  end, { desc = "Grep", noremap = true })
+
+  vim.keymap.set(
+    "n",
+    "<leader>ns",
+    MiniExtra.pickers.spellsuggest,
+    { desc = "Spelling suggestions", noremap = true }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<leader>vc",
+    MiniExtra.pickers.commands,
+    { desc = "Commands", noremap = true }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<leader>vk",
+    MiniExtra.pickers.keymaps,
+    { desc = "Keymaps", noremap = true }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<leader>vm",
+    MiniExtra.pickers.manpages,
+    { desc = "Manpages", noremap = true }
+  )
+
+  vim.keymap.set("n", "<leader>vo", function()
+    MiniExtra.pickers.options({
+      scope = "all",
+    })
+  end, { desc = "Options", noremap = true })
+
+  vim.keymap.set(
+    "n",
+    "<leader>vr",
+    MiniExtra.pickers.registers,
+    { desc = "Registers", noremap = true }
+  )
+
+  vim.keymap.set("n", "<leader>ghh", function()
+    MiniExtra.pickers.git_hunks({
+      scope = "unstaged",
+    })
+  end, { desc = "Unstaged hunks", noremap = true })
+
+  vim.keymap.set("n", "<leader>ghu", function()
+    MiniExtra.pickers.git_hunks({
+      scope = "staged",
+    })
+  end, { desc = "Staged hunks", noremap = true })
 end)
 
 later(function()
@@ -268,10 +327,18 @@ later(function()
 
       c = mini_ai.gen_spec.function_call(),
 
+      d = MiniExtra.gen_ai_spec.diagnostic(),
+
       f = mini_ai.gen_spec.treesitter({
         a = "@function.outer",
         i = "@function.inner",
       }),
+
+      i = MiniExtra.gen_ai_spec.indent(),
+
+      l = MiniExtra.gen_ai_spec.line(),
+
+      n = MiniExtra.gen_ai_spec.number(),
 
       o = mini_ai.gen_spec.treesitter({
         a = {
@@ -355,7 +422,6 @@ later(function()
         { mode = "n", keys = "<leader>i", desc = "+Map"           },
         { mode = "n", keys = "<leader>k", desc = "+Toggles"       },
         { mode = "n", keys = "<leader>n", desc = "+Buffer"        },
-        { mode = "n", keys = "<leader>m", desc = "+Map"           },
         { mode = "n", keys = "<leader>q", desc = "+Quit"          },
         { mode = "n", keys = "<leader>r", desc = "+Terminal"      },
         { mode = "n", keys = "<leader>s", desc = "+Find"          },
@@ -748,60 +814,57 @@ later(function()
 end)
 
 later(function()
-  require("mini.pick").setup()
-
-  -- '
-  -- *
-  -- ,
-  -- /
-  -- ?
+  require("mini.pick").setup({
+    mappings = {
+      -- stylua: ignore start
+      choose_marked = "<c-cr>",
+      delete_word   = "<c-bs>",
+      move_down     = "",
+      move_start    = "<m-g>",
+      move_up       = "",
+      scroll_down   = "<c-f>",
+      scroll_left   = "<m-f>",
+      scroll_right  = "<m-p>",
+      scroll_up     = "<c-p>",
+      -- stylua: ignore end
+    },
+  })
 
   vim.keymap.set(
     "n",
     "<leader><space>",
-    "<cmd>Pick files<cr>",
+    MiniPick.builtin.files,
     { desc = "Files", noremap = true }
   )
 
   vim.keymap.set(
     "n",
     "<leader>'",
-    "<cmd>Pick resume<cr>",
+    MiniPick.builtin.resume,
     { desc = "Resume previous picker", noremap = true }
   )
-  vim.keymap.set(
+  vim.keymap.set("n", "<leader>*", function()
+    MiniPick.builtin.grep({
+      pattern = vim.call("expand", "<cword>"),
+    })
+  end, { desc = "Grep current word", noremap = true })
 
-    "n",
-    "<leader>*",
-    '<cmd>Pick grep pattern="<cword>"<cr>',
-    { desc = "Grep current word", noremap = true }
-  )
-
-  vim.keymap.set(
-    "n",
-    "<leader>,",
-    "<cmd>Pick buffers<cr>",
-    { desc = "Buffers", noremap = true }
-  )
+  vim.keymap.set("n", "<leader>,", function()
+    MiniPick.builtin.buffers({
+      include_current = false,
+    })
+  end, { desc = "Buffers", noremap = true })
 
   vim.keymap.set(
     "n",
     "<leader>/",
-    "<cmd>Pick grep_live<cr>",
+    MiniPick.builtin.grep_live,
     { desc = "Grep", noremap = true }
   )
 
-  vim.keymap.set(
-    "n",
-    "<leader>?",
-    "<cmd>Pick help<cr>",
-    { desc = "Help", noremap = true }
-  )
-
-  vim.keymap.set(
-    "n",
-    "<leader>nn",
-    '<cmd>Pick buf_lines scope="current"<cr>',
-    { desc = "Grep", noremap = true }
-  )
+  vim.keymap.set("n", "<leader>?", function()
+    MiniPick.builtin.help({
+      default_split = "vertical",
+    })
+  end, { desc = "Help", noremap = true })
 end)

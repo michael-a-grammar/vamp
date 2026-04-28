@@ -70,16 +70,16 @@ now(function()
 
   vim.keymap.set(
     "n",
-    "<leader>aa",
+    "<leader>a",
     MiniNotify.clear,
     { desc = "Clear notifications", noremap = true }
   )
 
   vim.keymap.set(
     "n",
-    "<leader>ah",
+    "<leader>hn",
     MiniNotify.show_history,
-    { desc = "Notifications history", noremap = true }
+    { desc = "Notifications", noremap = true }
   )
 end)
 
@@ -305,13 +305,19 @@ later(function()
 
   vim.keymap.set("n", "<leader>ghh", function()
     MiniExtra.pickers.git_hunks({
+      -- stylua: ignore
+      path  = "%",
       scope = "unstaged",
+      -- stylua: end
     })
   end, { desc = "Unstaged hunks", noremap = true })
 
   vim.keymap.set("n", "<leader>ghu", function()
     MiniExtra.pickers.git_hunks({
+      -- stylua: ignore
+      path  = "%",
       scope = "staged",
+      -- stylua: end
     })
   end, { desc = "Staged hunks", noremap = true })
 end)
@@ -416,9 +422,9 @@ later(function()
     clues = {
       {
         -- stylua: ignore start
-        { mode = "n", keys = "<leader>a", desc = "+Notifications" },
         { mode = "n", keys = "<leader>f", desc = "+Navigation"    },
         { mode = "n", keys = "<leader>g", desc = "+Git"           },
+        { mode = "n", keys = "<leader>h", desc = "+History"       },
         { mode = "n", keys = "<leader>i", desc = "+Map"           },
         { mode = "n", keys = "<leader>k", desc = "+Toggles"       },
         { mode = "n", keys = "<leader>n", desc = "+Buffer"        },
@@ -431,8 +437,9 @@ later(function()
         { mode = "n", keys = "<leader>w", desc = "+Windows"       },
         { mode = "n", keys = "<leader>y", desc = "+Tabs"          },
 
-        { mode = "n", keys = "<leader>gh", desc = "+Hunks" },
-        { mode = "n", keys = "<leader>nf", desc = "+Path"  },
+        { mode = "n", keys = "<leader>ga", desc = "+Actions" },
+        { mode = "n", keys = "<leader>gh", desc = "+Hunks"   },
+        { mode = "n", keys = "<leader>nf", desc = "+Path"    },
 
         { mode = "n", keys = "<leader>ghf", postkeys = "<leader>gh" },
         { mode = "n", keys = "<leader>ghl", postkeys = "<leader>gh" },
@@ -448,11 +455,6 @@ later(function()
         { mode = "n", keys = "<leader>yl",  postkeys = "<leader>y"  },
         { mode = "n", keys = "<leader>yn",  postkeys = "<leader>y"  },
         { mode = "n", keys = "<leader>yp",  postkeys = "<leader>y"  },
-
-        -- { mode = "n", keys = "<Leader>e", desc = "+Explore/Edit"  },
-        -- { mode = "n", keys = "<Leader>m", desc = "+Map"           },
-        -- { mode = "n", keys = "<Leader>o", desc = "+Other"         },
-        -- { mode = "n", keys = "<Leader>v", desc = "+Visits"        },
         -- stylua: ignore end
       },
 
@@ -476,6 +478,7 @@ later(function()
     triggers = {
       -- stylua: ignore start
       { mode = { "n", "x" }, keys = "<leader>" },
+      { mode = { "n", "x" }, keys = "<bs>"     },
       { mode =   "n",        keys = "\\"       },
       { mode = { "n", "x" }, keys = "["        },
       { mode = { "n", "x" }, keys = "]"        },
@@ -540,11 +543,11 @@ later(function()
     MiniDiff.toggle_overlay()
   end, { desc = "Toggle overlay", noremap = true })
 
-  vim.keymap.set("n", "<leader>gr", function()
+  vim.keymap.set("n", "<leader>gar", function()
     return MiniDiff.operator("reset") .. "_"
   end, { desc = "Reset line", expr = true, remap = true })
 
-  vim.keymap.set("n", "<leader>gs", function()
+  vim.keymap.set("n", "<leader>gas", function()
     return MiniDiff.operator("apply") .. "_"
   end, { desc = "Stage line", expr = true, remap = true })
 
@@ -584,20 +587,6 @@ end)
 later(function()
   require("mini.git").setup()
 
-  vim.keymap.set(
-    "n",
-    "<leader>ga",
-    "<cmd>Git add %<cr>",
-    { desc = "Stage", noremap = true }
-  )
-
-  vim.keymap.set(
-    "n",
-    "<leader>gc",
-    "<cmd>Git commit<cr>",
-    { desc = "Commit", noremap = true }
-  )
-
   vim.keymap.set("n", "<leader>gf", function()
     MiniGit.show_range_history({
       -- stylua: ignore start
@@ -631,8 +620,22 @@ later(function()
   vim.keymap.set(
     "n",
     "<leader>go",
-    [[<cmd>vertical Git log --pretty=format:\%h\ \%as\ │\ \%s --topo-order<cr>]],
+    [[<cmd>vertical Git log --pretty=format:\%h\ \%as\ │\ \%s --topo-order --follow -- %<cr>]],
     { desc = "Show log", noremap = true }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<leader>gaa",
+    "<cmd>Git add %<cr>",
+    { desc = "Stage", noremap = true }
+  )
+
+  vim.keymap.set(
+    "n",
+    "<leader>gac",
+    "<cmd>Git commit %<cr>",
+    { desc = "Commit", noremap = true }
   )
 
   new_autocmd("User", "MiniGitCommandSplit", function(args)

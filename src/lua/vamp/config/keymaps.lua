@@ -25,13 +25,6 @@ vim.keymap.set(
   { desc = "Alternative buffer", noremap = true }
 )
 
-vim.keymap.set(
-  "n",
-  "<leader>nt",
-  "<cmd>tab split<cr>",
-  { desc = "Open buffer in new tab", noremap = true }
-)
-
 vim.keymap.set("n", "<leader>nff", function()
   vim.fn.setreg(vim.v.register, vim.fn.expand("%:p:t"))
 end, { desc = "Copy filename", noremap = true })
@@ -43,6 +36,13 @@ end, { desc = "Copy directory path", noremap = true })
 vim.keymap.set("n", "<leader>nfr", function()
   vim.fn.setreg(vim.v.register, vim.fn.expand("%:p"))
 end, { desc = "Copy full path", noremap = true })
+
+vim.keymap.set(
+  "n",
+  "<leader>nt",
+  "<cmd>tab split<cr>",
+  { desc = "Open buffer in new tab", noremap = true }
+)
 
 vim.keymap.set(
   "n",

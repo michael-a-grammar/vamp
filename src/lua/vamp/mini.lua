@@ -33,14 +33,6 @@ now(function()
   })
 
   vim.o.showtabline = 0
-
-  vim.keymap.set("n", "<leader>kt", function()
-    if vim.o.showtabline == 0 then
-      vim.o.showtabline = 1
-    else
-      vim.o.showtabline = 0
-    end
-  end, { desc = "Toggle tabline", noremap = true })
 end)
 
 now(function()

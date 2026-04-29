@@ -25,6 +25,14 @@ vim.keymap.set(
   { desc = "Alternative buffer", noremap = true }
 )
 
+vim.keymap.set("n", "<leader>kt", function()
+  if vim.o.showtabline == 0 then
+    vim.o.showtabline = 1
+  else
+    vim.o.showtabline = 0
+  end
+end, { desc = "Toggle tabline", noremap = true })
+
 vim.keymap.set("n", "<leader>nff", function()
   vim.fn.setreg(vim.v.register, vim.fn.expand("%:p:t"))
 end, { desc = "Copy filename", noremap = true })
@@ -60,6 +68,13 @@ vim.keymap.set(
 
 vim.keymap.set(
   "n",
+  "<leader>qr",
+  "<cmd>restart<cr>",
+  { desc = "Restart", noremap = true }
+)
+
+vim.keymap.set(
+  "n",
   "<leader>qw",
   "<cmd>wqall<cr>",
   { desc = "Write and quit all", noremap = true }
@@ -82,13 +97,6 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>ts", function()
   vim.api.nvim_win_set_buf(0, vim.api.nvim_create_buf(true, true))
 end, { desc = "New scratch buffer", noremap = true })
-
-vim.keymap.set(
-  "n",
-  "<leader>yp",
-  "<cmd>tabprevious<cr>",
-  { desc = "Previous tab", noremap = true }
-)
 
 vim.keymap.set("n", "<leader>vv", function()
   local is_vamp = string.find(vim.loop.cwd() or "", ".+/vamp.-")
@@ -155,6 +163,13 @@ vim.keymap.set(
   "<leader>yn",
   "<cmd>tabnext<cr>",
   { desc = "Next tab", noremap = true }
+)
+
+vim.keymap.set(
+  "n",
+  "<leader>yp",
+  "<cmd>tabprevious<cr>",
+  { desc = "Previous tab", noremap = true }
 )
 
 vim.keymap.set("i", "jj", "<esc>", { desc = "Normal mode", noremap = false })

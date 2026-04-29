@@ -2,7 +2,10 @@ vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
 
 _G.vamp = {}
 
-_G.vamp.catppuccin_theme = "mocha"
+-- stylua: ignore start
+_G.vamp.catppuccin         = false
+_G.vamp.catppuccin_flavour = "mocha"
+-- stylua: ignore end
 
 _G.Config = {}
 

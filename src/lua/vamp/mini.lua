@@ -974,3 +974,59 @@ later(function()
     { desc = "Grep", noremap = true }
   )
 end)
+
+later(function()
+  local mini_snippets = require("mini.snippets")
+
+  local latex_patterns = {
+    "latex/**/*.json",
+    "**/latex.json",
+  }
+
+  mini_snippets.setup({
+    snippets = {
+      mini_snippets.gen_loader.from_file(
+        vim.fn.stdpath("config") .. "/snippets/global.json"
+      ),
+
+      mini_snippets.gen_loader.from_lang({
+        lang_patterns = {
+          markdown_inline = {
+            "markdown.json",
+          },
+
+        -- stylua: ignore start
+        plaintex = latex_patterns,
+        tex      = latex_patterns,
+          -- stylua: ignore end
+        },
+      }),
+    },
+
+    mappings = {
+      -- stylua: ignore start
+      expand    = "<c-space>",
+      jump_next = "<c-p>",
+      jump_prev = "<c-f>",
+      stop      = "<esc>",
+      -- stylua: ignore end
+    },
+  })
+end)
+
+later(function()  
+  require("mini.splitjoin").setup()
+end)
+
+later(function()
+  require("mini.surround").setup()
+end)
+
+later(function()
+  require("mini.trailspace").setup()
+end)
+
+later(function()
+  require("mini.visits").setup()
+end)
+

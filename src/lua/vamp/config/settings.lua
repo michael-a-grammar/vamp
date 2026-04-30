@@ -3,7 +3,7 @@ local new_autocmd = require("vamp.lib.new_autocmd")
 local safely      = require("vamp.lib.safely")
 -- stylua: ignore end
 
-vim.g.mapleader = " "
+vim.g.mapleader = ' '
 
 -- stylua: ignore start
 vim.o.mouse       = "a"
@@ -14,10 +14,10 @@ vim.o.undofile    = true
 
 vim.o.shada = "'100,<50,s10,:1000,/100,@100,h"
 
-vim.cmd("filetype plugin indent on")
+vim.cmd('filetype plugin indent on')
 
-if vim.fn.exists("syntax_on") ~= 1 then
-  vim.cmd("syntax enable")
+if vim.fn.exists('syntax_on') ~= 1 then
+  vim.cmd('syntax enable')
 end
 
 -- stylua: ignore start
@@ -43,7 +43,7 @@ vim.o.winborder      = "single"
 vim.o.wrap           = false
 -- stylua: ignore end
 
-vim.o.cursorlineopt = "screenline,number"
+vim.o.cursorlineopt = 'screenline,number'
 
 -- stylua: ignore start
 vim.o.fillchars = "eob: ,fold:╌"
@@ -51,9 +51,9 @@ vim.o.listchars = "extends:…,nbsp:␣,precedes:…,tab:> "
 -- stylua: ignore end
 
 vim.o.foldlevel = 10
-vim.o.foldmethod = "indent"
+vim.o.foldmethod = 'indent'
 vim.o.foldnestmax = 10
-vim.o.foldtext = ""
+vim.o.foldtext = ''
 -- stylua: ignore end
 
 -- stylua: ignore start
@@ -71,7 +71,7 @@ vim.o.tabstop       = 2
 vim.o.virtualedit   = "block"
 -- stylua: ignore end
 
-vim.o.iskeyword = "@,48-57,_,192-255,-"
+vim.o.iskeyword = '@,48-57,_,192-255,-'
 
 vim.o.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
 
@@ -81,8 +81,10 @@ vim.o.completeopt     = "menuone,noselect,fuzzy,nosort"
 vim.o.completetimeout = 100
 -- stylua: ignore end
 
-new_autocmd("FileType", nil, function()
-  vim.cmd("setlocal formatoptions-=c formatoptions-=o")
+vim.o.spelllang = 'en_gb,en,it,es'
+
+new_autocmd('FileType', nil, function()
+  vim.cmd('setlocal formatoptions-=c formatoptions-=o')
 end, "Improved 'formatoptions'")
 
 local diagnostic_opts = {
@@ -95,15 +97,15 @@ local diagnostic_opts = {
     priority = 9999,
 
     severity = {
-      min = "WARN",
-      max = "ERROR",
+      min = 'WARN',
+      max = 'ERROR',
     },
   },
 
   underline = {
     severity = {
-      min = "HINT",
-      max = "ERROR",
+      min = 'HINT',
+      max = 'ERROR',
     },
   },
 
@@ -111,8 +113,8 @@ local diagnostic_opts = {
     current_line = true,
 
     severity = {
-      min = "ERROR",
-      max = "ERROR",
+      min = 'ERROR',
+      max = 'ERROR',
     },
   },
 }

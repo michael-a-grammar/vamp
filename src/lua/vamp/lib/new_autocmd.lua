@@ -1,6 +1,6 @@
 return setmetatable({}, {
   __call = function(_, event, pattern, callback, desc)
-    local group = vim.api.nvim_create_augroup("vamp", {
+    local group = vim.api.nvim_create_augroup('vamp', {
       clear = false,
     })
 

@@ -1,7 +1,7 @@
 local M = {}
 
 M.register = function()
-  local namespace = vim.api.nvim_create_namespace("buf-lines-color")
+  local namespace = vim.api.nvim_create_namespace('buf-lines-color')
 
   local buf_lines_color = function(buf_id, items, query, opts)
     if items == nil or #items == 0 then
@@ -15,7 +15,7 @@ M.register = function()
     local digit_prefixes = {}
 
     for i, l in ipairs(lines) do
-      local _, prefix_end, prefix = l:find("^(%s*%d+│)")
+      local _, prefix_end, prefix = l:find('^(%s*%d+│)')
 
       if prefix_end ~= nil then
         digit_prefixes[i], lines[i] = prefix, l:sub(prefix_end + 1)
@@ -29,11 +29,11 @@ M.register = function()
         virt_text = {
           {
             prefix,
-            "LineNr",
+            'LineNr',
           },
         },
 
-        virt_text_pos = "inline",
+        virt_text_pos = 'inline',
       }
 
       vim.api.nvim_buf_set_extmark(buf_id, namespace, i - 1, 0, opts)
@@ -53,7 +53,7 @@ M.register = function()
 
   MiniPick.registry.buf_lines_color = function()
     MiniExtra.pickers.buf_lines({
-      scope = "current",
+      scope = 'current',
     }, {
       source = {
         show = buf_lines_color,

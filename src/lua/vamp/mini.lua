@@ -1,6 +1,6 @@
 -- stylua: ignore start
-local new_autocmd = require("vamp.lib.new_autocmd")
-local safely      = require("vamp.lib.safely")
+local new_autocmd = require('vamp.lib.new_autocmd')
+local safely      = require('vamp.lib.safely')
 -- stylua: ignore end
 
 local now, now_if_args, later = safely.now, safely.now_if_args, safely.later
@@ -17,7 +17,7 @@ now(function()
     mappings = {
       -- stylua: ignore start
       basic                = true,
-      option_toggle_prefix = "<leader>k",
+      option_toggle_prefix = '<leader>k',
       move_with_alt        = false,
       windows              = false,
       -- stylua: ignore end
@@ -27,7 +27,7 @@ now(function()
       -- stylua: ignore start
       basic       = false,
       extra_ui    = false,
-      win_borders = "auto",
+      win_borders = 'auto',
       -- stylua: ignore end
     },
   })
@@ -102,19 +102,19 @@ now_if_args(function()
   require('mini.files').setup({
     mappings = {
       -- stylua: ignore start
-      close       = "<esc>",
-      go_in       = "<cr>",
-      go_in_plus  = "<c-cr>",
-      go_out      = "<bs>",
-      go_out_plus = "",
+      close       = '<esc>',
+      go_in       = '<cr>',
+      go_in_plus  = '<c-cr>',
+      go_out      = '<bs>',
+      go_out_plus = '',
       mark_goto   = "'",
-      mark_set    = "m",
-      reset       = "u",
-      reveal_cwd  = "@",
-      show_help   = "g?",
-      synchronize = "w",
-      trim_left   = "<",
-      trim_right  = ">",
+      mark_set    = 'm',
+      reset       = 'u',
+      reveal_cwd  = '@',
+      show_help   = 'g?',
+      synchronize = 'w',
+      trim_left   = '<',
+      trim_right  = '>',
       -- stylua: ignore start
     },
 
@@ -531,41 +531,41 @@ later(function()
     clues = {
       {
         -- stylua: ignore start
-        { mode = "n", keys = "<leader>f", desc = "+Navigation"    },
-        { mode = "n", keys = "<leader>g", desc = "+Git (buffer)"  },
-        { mode = "n", keys = "<leader>h", desc = "+History"       },
-        { mode = "n", keys = "<leader>i", desc = "+Map"           },
-        { mode = "n", keys = "<leader>k", desc = "+Toggles"       },
-        { mode = "n", keys = "<leader>n", desc = "+Buffer"        },
-        { mode = "n", keys = "<leader>q", desc = "+Quit"          },
-        { mode = "n", keys = "<leader>r", desc = "+Terminal"      },
-        { mode = "n", keys = "<leader>s", desc = "+Visits"        },
-        { mode = "n", keys = "<leader>t", desc = "+Buffers"       },
-        { mode = "n", keys = "<leader>u", desc = "+Session"       },
-        { mode = "n", keys = "<leader>v", desc = "+Vim"           },
-        { mode = "n", keys = "<leader>w", desc = "+Windows"       },
-        { mode = "n", keys = "<leader>y", desc = "+Tabs"          },
+        { mode = 'n', keys = '<leader>f', desc = '+Navigation'    },
+        { mode = 'n', keys = '<leader>g', desc = '+Git (buffer)'  },
+        { mode = 'n', keys = '<leader>h', desc = '+History'       },
+        { mode = 'n', keys = '<leader>i', desc = '+Map'           },
+        { mode = 'n', keys = '<leader>k', desc = '+Toggles'       },
+        { mode = 'n', keys = '<leader>n', desc = '+Buffer'        },
+        { mode = 'n', keys = '<leader>q', desc = '+Quit'          },
+        { mode = 'n', keys = '<leader>r', desc = '+Terminal'      },
+        { mode = 'n', keys = '<leader>s', desc = '+Visits'        },
+        { mode = 'n', keys = '<leader>t', desc = '+Buffers'       },
+        { mode = 'n', keys = '<leader>u', desc = '+Session'       },
+        { mode = 'n', keys = '<leader>v', desc = '+Vim'           },
+        { mode = 'n', keys = '<leader>w', desc = '+Windows'       },
+        { mode = 'n', keys = '<leader>y', desc = '+Tabs'          },
 
-        { mode = "n", keys = "<leader>ga", desc = "+Actions" },
-        { mode = "n", keys = "<leader>gh", desc = "+Hunks"   },
-        { mode = "n", keys = "<leader>nf", desc = "+Path"    },
+        { mode = 'n', keys = '<leader>ga', desc = '+Actions' },
+        { mode = 'n', keys = '<leader>gh', desc = '+Hunks'   },
+        { mode = 'n', keys = '<leader>nf', desc = '+Path'    },
 
-        { mode = "n", keys = "<leader>ghf", postkeys = "<leader>gh" },
-        { mode = "n", keys = "<leader>ghl", postkeys = "<leader>gh" },
-        { mode = "n", keys = "<leader>ghn", postkeys = "<leader>gh" },
-        { mode = "n", keys = "<leader>ghp", postkeys = "<leader>gh" },
-        { mode = "n", keys = "<leader>tn",  postkeys = "<leader>t"  },
-        { mode = "n", keys = "<leader>tp",  postkeys = "<leader>t"  },
-        { mode = "n", keys = "<leader>wf",  postkeys = "<leader>w"  },
-        { mode = "n", keys = "<leader>wl",  postkeys = "<leader>w"  },
-        { mode = "n", keys = "<leader>wn",  postkeys = "<leader>w"  },
-        { mode = "n", keys = "<leader>wp",  postkeys = "<leader>w"  },
-        { mode = "n", keys = "<leader>ws",  postkeys = "<leader>w"  },
-        { mode = "n", keys = "<leader>wv",  postkeys = "<leader>w"  },
-        { mode = "n", keys = "<leader>yf",  postkeys = "<leader>y"  },
-        { mode = "n", keys = "<leader>yl",  postkeys = "<leader>y"  },
-        { mode = "n", keys = "<leader>yn",  postkeys = "<leader>y"  },
-        { mode = "n", keys = "<leader>yp",  postkeys = "<leader>y"  },
+        { mode = 'n', keys = '<leader>ghf', postkeys = '<leader>gh' },
+        { mode = 'n', keys = '<leader>ghl', postkeys = '<leader>gh' },
+        { mode = 'n', keys = '<leader>ghn', postkeys = '<leader>gh' },
+        { mode = 'n', keys = '<leader>ghp', postkeys = '<leader>gh' },
+        { mode = 'n', keys = '<leader>tn',  postkeys = '<leader>t'  },
+        { mode = 'n', keys = '<leader>tp',  postkeys = '<leader>t'  },
+        { mode = 'n', keys = '<leader>wf',  postkeys = '<leader>w'  },
+        { mode = 'n', keys = '<leader>wl',  postkeys = '<leader>w'  },
+        { mode = 'n', keys = '<leader>wn',  postkeys = '<leader>w'  },
+        { mode = 'n', keys = '<leader>wp',  postkeys = '<leader>w'  },
+        { mode = 'n', keys = '<leader>ws',  postkeys = '<leader>w'  },
+        { mode = 'n', keys = '<leader>wv',  postkeys = '<leader>w'  },
+        { mode = 'n', keys = '<leader>yf',  postkeys = '<leader>y'  },
+        { mode = 'n', keys = '<leader>yl',  postkeys = '<leader>y'  },
+        { mode = 'n', keys = '<leader>yn',  postkeys = '<leader>y'  },
+        { mode = 'n', keys = '<leader>yp',  postkeys = '<leader>y'  },
         -- stylua: ignore end
       },
 
@@ -588,28 +588,28 @@ later(function()
 
     triggers = {
       -- stylua: ignore start
-      { mode = { "n", "x" }, keys = "<leader>" },
-      { mode = { "n", "x" }, keys = "<bs>"     },
-      { mode =   "n",        keys = "\\"       },
-      { mode = { "n", "x" }, keys = "["        },
-      { mode = { "n", "x" }, keys = "]"        },
-      { mode =   "i",        keys = "<c-x>"    },
-      { mode = { "n", "x" }, keys = "g"        },
-      { mode = { "n", "x" }, keys = "'"        },
-      { mode = { "n", "x" }, keys = '`'        },
-      { mode = { "n", "x" }, keys = '"'        },
-      { mode = { "i", "c" }, keys = "<c-r>"    },
-      { mode =   "n",        keys = "<c-w>"    },
-      { mode = { "n", "x" }, keys = "s"        },
-      { mode = { "n", "x" }, keys = "z"        },
+      { mode = { 'n', 'x' }, keys = '<leader>' },
+      { mode = { 'n', 'x' }, keys = '<bs>'     },
+      { mode =   'n',        keys = '\\'       },
+      { mode = { 'n', 'x' }, keys = '['        },
+      { mode = { 'n', 'x' }, keys = ']'        },
+      { mode =   'i',        keys = '<c-x>'    },
+      { mode = { 'n', 'x' }, keys = 'g'        },
+      { mode = { 'n', 'x' }, keys = '"'        },
+      { mode = { 'n', 'x' }, keys = '`'        },
+      { mode = { 'n', 'x' }, keys = "'"        },
+      { mode = { 'i', 'c' }, keys = '<c-r>'    },
+      { mode =   'n',        keys = '<c-w>'    },
+      { mode = { 'n', 'x' }, keys = 's'        },
+      { mode = { 'n', 'x' }, keys = 'z'        },
       -- stylua: ignore end
     },
 
     window = {
       -- stylua: ignore start
       delay       = 500,
-      scroll_down = "<c-f>",
-      scroll_up   = "<c-p>",
+      scroll_down = '<c-f>',
+      scroll_up   = '<c-p>',
       -- stylua: ignore end
     },
   })
@@ -821,7 +821,7 @@ later(function()
     MiniJump.stop_jumping()
   end, {
     -- stylua: ignore start
-    desc  = "Return to normal mode / cancel jumping",
+    desc  = 'Return to normal mode / cancel jumping',
     expr  = true,
     remap = true,
     -- stylua: ignore start
@@ -931,15 +931,15 @@ later(function()
   require('mini.pick').setup({
     mappings = {
       -- stylua: ignore start
-      choose_marked = "<c-cr>",
-      delete_word   = "<c-bs>",
-      move_down     = "",
-      move_start    = "<m-g>",
-      move_up       = "",
-      scroll_down   = "<c-f>",
-      scroll_left   = "<m-f>",
-      scroll_right  = "<m-p>",
-      scroll_up     = "<c-p>",
+      choose_marked = '<c-cr>',
+      delete_word   = '<c-bs>',
+      move_down     = '',
+      move_start    = '<m-g>',
+      move_up       = '',
+      scroll_down   = '<c-f>',
+      scroll_left   = '<m-f>',
+      scroll_right  = '<m-p>',
+      scroll_up     = '<c-p>',
       -- stylua: ignore end
     },
   })
@@ -1022,10 +1022,10 @@ later(function()
 
     mappings = {
       -- stylua: ignore start
-      expand    = "<c-space>",
-      jump_next = "<c-p>",
-      jump_prev = "<c-f>",
-      stop      = "<esc>",
+      expand    = '<c-space>',
+      jump_next = '<c-p>',
+      jump_prev = '<c-f>',
+      stop      = '<esc>',
       -- stylua: ignore end
     },
   })

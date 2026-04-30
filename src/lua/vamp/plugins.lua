@@ -1,7 +1,7 @@
 -- stylua: ignore start
-local new_autocmd    = require("vamp.lib.new_autocmd")
-local on_packchanged = require("vamp.lib.on_packchanged")
-local safely         = require("vamp.lib.safely")
+local new_autocmd    = require('vamp.lib.new_autocmd')
+local on_packchanged = require('vamp.lib.on_packchanged')
+local safely         = require('vamp.lib.safely')
 -- stylua: ignore end
 
 local now, now_if_args, later, add =
@@ -53,7 +53,12 @@ now(function()
     vim.cmd('colorscheme kanagawa')
   end
 
-  catppuccin()
+  _G.vamp.colorscheme({
+    -- stylua: ignore start
+    catppuccin = catppuccin,
+    kanagawa   = kanagawa,
+    -- stylua: ignore end
+  })
 end)
 
 now_if_args(function()
